@@ -32,12 +32,12 @@ export default function NavbarComponent() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link href="/auth/register">
+                  <Link href=" /register">
                     <a className="nav-link">Register</a>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link href="/auth/login">
+                  <Link href="/login">
                     <a className="nav-link">Login</a>
                   </Link>
                 </li>
