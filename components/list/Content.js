@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { query, collection, getDocs } from "firebase/firestore";
 import { Row, Col } from "reactstrap";
 import Link from "next/link";
-import { db } from "../../config/firebase";
+import { db } from "../../firebase/config";
 import {
   CardBody,
   CardGroup,
