@@ -1,28 +1,11 @@
 import { useEffect, useState } from "react";
-import { db } from "../../firebase/config";
-import { doc, getDoc } from "firebase/firestore";
-import { useRouter } from "next/router";
 
-const ImgDetail = () => {
+const ImgDetail = ({ detailGame }) => {
   const [data, setData] = useState("");
-  const router = useRouter();
-  const { gid } = router.query;
-
-  const fetchMyAPI = async () => {
-    const docRef = doc(db, "games", gid);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      setData(docSnap.data());
-    } else {
-      //console.log("No such document!");
-    }
-  };
 
   useEffect(() => {
-    if (gid?.length > 0) {
-      fetchMyAPI();
-    }
-  }, [gid]);
+    setData(detailGame);
+  }, [detailGame]);
 
   return (
     <div>

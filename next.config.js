@@ -4,13 +4,13 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: '/auth/login',
-        destination: '/login',
+        source: "/login",
+        destination: "/auth/login",
       },
       {
-        source: '/auth/register',
-        destination: '/register',
+        source: "/register",
+        destination: "/auth/register",
       },
-    ]
+    ];
   },
-}
+};
