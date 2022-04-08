@@ -10,6 +10,7 @@ export default function NavbarComponent() {
   const [isOpen, setIsOpen] = useState(false)
   const [displayName, setDisplayName] = useState("")
   const [photoURL, setPhotoURL] = useState("")
+  const [uid, setUid] = useState("")
   const router = useRouter()
 
   const user = auth.currentUser
@@ -17,6 +18,7 @@ export default function NavbarComponent() {
     if (user !== null) {
       setDisplayName(user.displayName)
       setPhotoURL(user.photoURL)
+      setUid(user.uid)
     }
   }, [])
 
@@ -33,7 +35,7 @@ export default function NavbarComponent() {
       return (
         <>
           <img src={photoURL} alt="Profile" width={40} height={40} />
-          <NavItem><Link href="/profile"><a className="nav-link"><strong>{displayName}</strong></a></Link></NavItem>
+          <NavItem><Link href={"/profile/" + [uid]}><a className="nav-link"><strong>{displayName}</strong></a></Link></NavItem>
           <NavItem><div onClick={logout} className="btn nav-link">Logout</div></NavItem>
         </>
       )
