@@ -1,30 +1,46 @@
 import Link from "next/link";
-import { Button, Row, Col, Badge, Container, Table, Card, CardImg, CardBody, CardSubtitle, CardTitle, CardText } from "reactstrap";
+import { Button, Row, Col, Badge, Container, Table, Card, CardImg, CardBody, } from "reactstrap";
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
 import Layout from "../../components/layouts/Layout";
+import { auth } from '../../firebase/config'
 
 export default function Profile() {
+  const [dataUser, setDataUser] = useState([])
+
+  const data = []
+  const user = auth.currentUser
+  useEffect(() => {
+    data.push(user)
+    setDataUser(data[0])
+    // console.log(data[0].email)
+  }, [])
+
   return (
     <div>
       <Layout title="Profile">
         <Container>
-          <Row>
-            <Col xs="auto" lg="4">
+          <Row className="justify-content-center">
+            <Col xs="auto" md="4" lg="4">
               <div className="mt-2 text-center">
-                <Image
-                  src="/user.png"
+                <img
+                  src={dataUser.photoURL}
                   alt="Profile"
-                  width={50}
-                  height={50}
+                  width={250}
+                  height={250}
                 />
-                <h3>Username</h3>
+                <h3>{dataUser.displayName}</h3>
               </div>
               <Table size="sm">
                 <tbody>
                   <tr>
                     <th scope="row">Email</th>
-                    <td>: email@email.com</td>
+                    <td>: {dataUser.email}</td>
                   </tr>
+                  {/* <tr>
+                    <th scope="row">Joined</th>
+                    <td>: {dataUser.metadata.creationTime}</td>
+                  </tr> */}
                   <tr>
                     <th scope="row">Level</th>
                     <td>: Easy</td>
@@ -37,7 +53,7 @@ export default function Profile() {
               </Table>
               <div className="mt-2 text-center">
                 <Link href="/profile/update">
-                  <Button>Update Profile</Button>
+                  <Button color="primary">Update Profile</Button>
                 </Link>
               </div>
             </Col>
@@ -71,7 +87,7 @@ export default function Profile() {
                         </tr>
                       </tbody>
                     </Table>
-                    <Button>Play Again</Button>
+                    <Button color="primary">Play Again</Button>
                   </CardBody>
                 </Card>
               </Col>

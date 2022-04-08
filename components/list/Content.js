@@ -29,7 +29,7 @@ const Content = () => {
         //console.log(e);
       }
     }
-    checkUser();
+    // checkUser();
     fetchData();
   }, []);
 

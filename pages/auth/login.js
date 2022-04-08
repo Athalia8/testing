@@ -4,29 +4,28 @@ import FormLogin from "../../components/auth/FormLogin";
 import SignFacebook from "../../components/auth/SignFacebook";
 import SignGoogle from "../../components/auth/SignGoogle";
 import Content from "../../components/auth/Content";
+import { Container, Col } from 'reactstrap';
 
 export default function Login() {
   return (
     <Layout title="Login">
-      <div className={styles.component}>
-        <div className={styles.container}>
-          <div className="d-flex justify-content-center align-items-center flex-wrap">
+      <Container>
+        <div className="d-flex justify-content-center">
+          <Col lg="6" className={styles.content}>
             <Content />
-            <div className={styles.form_card}>
-              <div>
-                <div className="card-head">
-                  <p className="m-0 text-center fs-08">Sign in with</p>
-                  <div className="d-flex align-items-center justify-content-center">
-                    <SignGoogle />
-                    <SignFacebook />
-                  </div>
-                </div>
-                <FormLogin />
+          </Col>
+          <div className={styles.form_card}>
+            <div>
+              <h3 className="text-center my-2">Login</h3>
+              <div className="d-flex justify-content-center mb-3">
+                <SignGoogle />
+                <SignFacebook />
               </div>
+              <FormLogin />
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </Layout>
   );
 }
