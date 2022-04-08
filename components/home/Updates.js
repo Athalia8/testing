@@ -27,7 +27,6 @@ const Updates = ({ updates, updates_id }) => {
 
   const goToIndex = (newIndex) => {
     if (animating) return;
-    console.log(newIndex);
     setActiveIndex(newIndex);
   };
 

@@ -209,7 +209,7 @@ const GameBody = (props) => {
         <div className="col-4 p-3 test">
           <div className={playerR + " test2"} id="batu_player">
             <img
-              src={window.location.origin + "/assets/batu.png"}
+              src="/assets/batu.png"
               alt="Batu"
               style={{ width: "50px", height: "75px" }}
               onClick={() => {
@@ -225,7 +225,7 @@ const GameBody = (props) => {
         <div className="col-4 p-3 test">
           <div className={cpuR + " test2"} id="batu_cpu">
             <img
-              src={window.location.origin + "/assets/batu.png"}
+              src="/assets/batu.png"
               alt="Batu"
               style={{ width: "50px", height: "75px" }}
               onClick={() => {
@@ -240,7 +240,7 @@ const GameBody = (props) => {
         <div className="col-4 p-3 test">
           <div className={playerP + " test2"} id="kertas_player">
             <img
-              src={window.location.origin + "/assets/kertas.png"}
+              src="/assets/kertas.png"
               alt="Batu"
               style={{ width: "50px", height: "75px" }}
               onClick={() => {
@@ -260,7 +260,7 @@ const GameBody = (props) => {
         <div className="col-4 p-3 test">
           <div className={cpuP + " test2"} id="kertas_cpu">
             <img
-              src={window.location.origin + "/assets/kertas.png"}
+              src="/assets/kertas.png"
               alt="Batu"
               style={{ width: "50px", height: "75px" }}
               onClick={() => {
@@ -275,7 +275,7 @@ const GameBody = (props) => {
         <div className="col-4 p-3 test">
           <div className={playerS + " test2"} id="gunting_player">
             <img
-              src={window.location.origin + "/assets/gunting.png"}
+              src="/assets/gunting.png"
               alt="Batu"
               style={{ width: "50px", height: "75px" }}
               onClick={() => {
@@ -289,7 +289,7 @@ const GameBody = (props) => {
         </div>
         <div className="col-4 p-3" style={{ textAlign: "center", margin: "auto" }} id="refresh">
           <img
-            src={window.location.origin + "/assets/refresh.png"}
+            src="/assets/refresh.png"
             alt="refresh"
             id="button-refresh"
             style={{ width: "50px", display: "none" }}
@@ -299,7 +299,7 @@ const GameBody = (props) => {
         <div className="col-4 p-3 test">
           <div className={cpuS + " test2"} id="gunting_cpu">
             <img
-              src={window.location.origin + "/assets/gunting.png"}
+              src="/assets/gunting.png"
               alt="Batu"
               style={{ width: "50px", height: "75px" }}
               onClick={() => {

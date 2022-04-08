@@ -17,7 +17,7 @@ const CardUser = ({ detailGame3, detailGame4 }) => {
     setGame(detailGame4);
     setUser(detailGame3);
   }, []);
-  console.log(game);
+
   if (user.length && game.length) {
     cardUser = user.map((u) => {
       return (

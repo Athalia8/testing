@@ -8,12 +8,11 @@ import { doc, getDoc } from "firebase/firestore";
 
 export async function getServerSideProps(context) {
   const { gid } = context.query;
-
+  const gameId = gid;
   let detailGame;
   let detailGame2 = [];
   let detailGame3 = [];
   let detailGame4 = [];
-
   //ImgDetail
   const docRef = doc(db, "games", gid);
   const docSnap = await getDoc(docRef);
@@ -38,7 +37,6 @@ export async function getServerSideProps(context) {
     const docRef4 = doc(db, "rps_game_points", "zrr61FqsTRZk2H8UJuxdw9XUWlJ2");
     const docSnap4 = await getDoc(docRef4);
     if (docSnap4.exists()) {
-      console.log(docSnap4.data());
       detailGame4.push(docSnap4.data());
     }
   }
@@ -48,11 +46,12 @@ export async function getServerSideProps(context) {
       detailGame2,
       detailGame3,
       detailGame4,
+      gameId,
     },
   };
 }
 
-export default function GameDetail({ detailGame, detailGame2, detailGame3, detailGame4 }) {
+export default function GameDetail({ detailGame, detailGame2, detailGame3, detailGame4, gameId }) {
   return (
     <div>
       <Layout title="Game detail">
@@ -63,7 +62,7 @@ export default function GameDetail({ detailGame, detailGame2, detailGame3, detai
             </Col>
             <Col sm={4}>
               <CardUser detailGame3={detailGame3} detailGame4={detailGame4} />
-              <Card detailGame2={detailGame2} />
+              <Card detailGame2={detailGame2} gameId={gameId} />
             </Col>
           </Row>
         </Container>

@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { Card, CardBody, CardTitle, CardText, Button } from "reactstrap";
 import swal from "sweetalert";
-
-const CardInfo = ({ detailGame2 }) => {
+import { useRouter } from "next/router";
+const CardInfo = ({ detailGame2, gameId }) => {
   const [data, setData] = useState([]);
+  const [gid, setGid] = useState("");
   let cardInfo;
-
+  const router = useRouter();
   useEffect(() => {
     setData(detailGame2);
+    setGid(gameId);
   }, [data]);
 
   if (data.length) {
