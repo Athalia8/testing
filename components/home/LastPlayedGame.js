@@ -27,7 +27,6 @@ const LastPlayedGame = ({ itemss, idss }) => {
 
   const goToIndex = (newIndex) => {
     if (animating) return;
-    console.log(newIndex);
     setActiveIndex(newIndex);
   };
 

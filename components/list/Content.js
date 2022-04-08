@@ -3,27 +3,17 @@ import { query, collection, getDocs } from "firebase/firestore";
 import { Row, Col } from "reactstrap";
 import Link from "next/link";
 import { db } from "../../firebase/config";
-import {
-  CardBody,
-  CardGroup,
-  CardSubtitle,
-  Button,
-  Card,
-  CardImg,
-  CardTitle,
-  CardText,
-  Container,
-} from "reactstrap";
+import { CardBody, CardGroup, CardSubtitle, Button, Card, CardImg, CardTitle, CardText, Container } from "reactstrap";
 import styles from "../../styles/Home.module.css";
 
 const Content = () => {
   const [orders, setOrders] = useState([]);
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(true); //false
 
-  const checkUser = () => {
-    const token = localStorage.getItem("token");
-    token ? setUser(true) : setUser(false);
-  };
+  // const checkUser = () => {
+  //   const token = localStorage.getItem("token");
+  //   token ? setUser(true) : setUser(false);
+  // };
 
   useEffect(() => {
     async function fetchData() {
@@ -50,13 +40,7 @@ const Content = () => {
           <Col xs="12" sm="6" md="6" className={styles.listCol}>
             {orders.map((order) => (
               <Card className={styles.listBorder} key={order.id}>
-                <CardImg
-                  className={styles.listImgContent}
-                  alt="Card image cap"
-                  src={order.thumbnail}
-                  top
-                  width="50%"
-                />
+                <CardImg className={styles.listImgContent} alt="Card image cap" src={order.thumbnail} top width="50%" />
                 <CardBody className={styles.listCenter}>
                   <CardTitle className={styles.listMyFont} tag="h5">
                     {order.name}
@@ -68,9 +52,7 @@ const Content = () => {
                     <i className="bi bi-star-fill text-danger"></i>
                     <i className="bi bi-star-half text-danger"></i>
                   </CardSubtitle>
-                  <CardText className={styles.listDate}>
-                    {order.release_date}
-                  </CardText>
+                  <CardText className={styles.listDate}>{order.release_date}</CardText>
                   {user ? (
                     <Link href={"/detailgame/" + order.id}>
                       <Button color="warning" className={styles.listDate}>
@@ -91,13 +73,7 @@ const Content = () => {
           <Col xs="0" sm="6" md="6">
             {orders.map((order) => (
               <Card className={styles.listBorder} key={order.id}>
-                <CardImg
-                  className={styles.listImgContent}
-                  alt="Card image cap"
-                  src={order.thumbnail}
-                  top
-                  width="50%"
-                />
+                <CardImg className={styles.listImgContent} alt="Card image cap" src={order.thumbnail} top width="50%" />
                 <CardBody className={styles.listCenter}>
                   <CardTitle className={styles.listMyFont} tag="h5">
                     {order.name}
@@ -109,9 +85,7 @@ const Content = () => {
                     <i className="bi bi-star-fill text-danger"></i>
                     <i className="bi bi-star-half text-danger"></i>
                   </CardSubtitle>
-                  <CardText className={styles.listDate}>
-                    {order.release_date}
-                  </CardText>
+                  <CardText className={styles.listDate}>{order.release_date}</CardText>
                   {user ? (
                     <Link href={"/detailgame/" + order.id}>
                       <Button color="warning" className={styles.listDate}>
