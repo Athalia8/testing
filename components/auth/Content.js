@@ -1,18 +1,15 @@
-import styles from './Auth.module.css'
+import Link from "next/link";
+import { Button } from 'reactstrap'
 
 export default function Content() {
   return (
-    <div className={styles.content}>
-      <div className="h4">Different Online Gaming Platform </div>
-      <div className="fs-5 text-grey">
-        Completed with examples
-      </div>
-      <div className="text my-4 text-grey">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur facilis, voluptatum veritatis molestias quas iusto, atque corporis saepe ducimus repellat eveniet eaque! Dicta deserunt, minima eos nobis repellat inventore sunt!
-      </div>
-      <div className="d-flex align-items-center pt-3 mt-4">
-        <div className="btn btn-default">Refresh Page</div>
-      </div>
+    <div>
+      <h1 className="display-4">Online Gaming Platform</h1>
+      <p className="lead">This is a simple hero unit, a simple Jumbotron-style component for calling extra attention to featured content or information.</p>
+      <hr className="my-2" />
+      <p className="lead">
+        <Link href="/"><Button color="primary">Learn More</Button></Link>
+      </p>
     </div>
   );
 }

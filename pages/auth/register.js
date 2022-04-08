@@ -4,29 +4,29 @@ import Content from "../../components/auth/Content";
 import SignGoogle from "../../components/auth/SignGoogle";
 import SignFacebook from "../../components/auth/SignFacebook";
 import FormRegister from "../../components/auth/FormRegister";
+import { Container, Col } from 'reactstrap';
+
 
 export default function Register() {
   return (
     <Layout title="Register">
-      <div className={styles.component}>
-        <div className={styles.container}>
-          <div className="d-flex justify-content-center align-items-center flex-wrap">
+      <Container>
+        <div className="d-flex justify-content-center">
+          <Col lg="6" className={styles.content}>
             <Content />
-            <div className={styles.form_card}>
-              <div>
-                <div className="card-head">
-                  <p className="m-0 text-center fs-08">Sign in with</p>
-                  <div className="d-flex align-items-center justify-content-center">
-                    <SignGoogle />
-                    <SignFacebook />
-                  </div>
-                </div>
-                <FormRegister />
+          </Col>
+          <div className={styles.form_card}>
+            <div>
+              <h3 className="text-center my-3">Register</h3>
+              <div className="d-flex justify-content-center mb-3">
+                <SignGoogle />
+                <SignFacebook />
               </div>
+              <FormRegister />
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </Layout>
   );
 }
