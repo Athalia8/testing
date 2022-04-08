@@ -47,7 +47,7 @@ const Content = () => {
     <Container className="pt-5">
       <CardGroup className={styles.listBgColor}>
         <Row className="pt-3">
-          <Col xs="6">
+          <Col xs="12" sm="6" md="6" className={styles.listCol}>
             {orders.map((order) => (
               <Card className={styles.listBorder} key={order.id}>
                 <CardImg
@@ -68,21 +68,27 @@ const Content = () => {
                     <i className="bi bi-star-fill text-danger"></i>
                     <i className="bi bi-star-half text-danger"></i>
                   </CardSubtitle>
-                  <CardText>{order.release_date}</CardText>
+                  <CardText className={styles.listDate}>
+                    {order.release_date}
+                  </CardText>
                   {user ? (
                     <Link href={"/detailgame/" + order.id}>
-                      <Button color="warning">Game Detail</Button>
+                      <Button color="warning" className={styles.listDate}>
+                        Game Detail
+                      </Button>
                     </Link>
                   ) : (
                     <Link href={"/login"}>
-                      <Button color="warning">Game Detail</Button>
+                      <Button color="warning" className={styles.listDate}>
+                        Game Detail
+                      </Button>
                     </Link>
                   )}
                 </CardBody>
               </Card>
             ))}
           </Col>
-          <Col xs="6">
+          <Col xs="0" sm="6" md="6">
             {orders.map((order) => (
               <Card className={styles.listBorder} key={order.id}>
                 <CardImg
@@ -103,14 +109,20 @@ const Content = () => {
                     <i className="bi bi-star-fill text-danger"></i>
                     <i className="bi bi-star-half text-danger"></i>
                   </CardSubtitle>
-                  <CardText>{order.release_date}</CardText>
+                  <CardText className={styles.listDate}>
+                    {order.release_date}
+                  </CardText>
                   {user ? (
                     <Link href={"/detailgame/" + order.id}>
-                      <Button color="warning">Game Detail</Button>
+                      <Button color="warning" className={styles.listDate}>
+                        Game Detail
+                      </Button>
                     </Link>
                   ) : (
                     <Link href={"/login"}>
-                      <Button color="warning">Game Detail</Button>
+                      <Button color="warning" className={styles.listDate}>
+                        Game Detail
+                      </Button>
                     </Link>
                   )}
                 </CardBody>
