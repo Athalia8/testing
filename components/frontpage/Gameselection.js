@@ -1,18 +1,28 @@
-import Layout from "../Layout";
-// import Link from 'next/link'
+import { Row, Col } from "reactstrap";
 
 export default function Gameselection () {
     return (
-        <Layout>
+
        <div className='Gameslider'>
           <h1>Choose your Game Gender</h1>
           <div>
-              <p><span className='bold'>
+              <Row>
+                  <Col  sm="2">
               <button type="button" className="btn btn-outline-dark">Fantasy</button>      
-            </span></p>
-              <p><button type="button" className="btn btn-outline-dark">action</button></p>
-              <p><button type="button" className="btn btn-outline-dark">RGP</button></p>
-              <p><button type="button" className="btn btn-outline-dark">Thriller</button></p>
+                  </Col>
+                  <Col sm="2">
+                  <button type="button" className="btn btn-outline-dark">action</button>
+                  </Col>
+                  <Col sm="2">
+                  <button type="button" className="btn btn-outline-dark">action</button>
+                  </Col>
+                  <Col sm="2">
+                  <button type="button" className="btn btn-outline-dark">RGP</button>
+                  </Col>
+                  <Col sm="2">
+                  <button type="button" className="btn btn-outline-dark">Thriller</button>
+                  </Col>
+              </Row>
           </div>
           <div className='container'>
               <img src="https://cdn.pixabay.com/photo/2019/09/23/16/06/war-4499000_960_720.jpg"  className='pilihan' alt='action game' /> 
@@ -21,6 +31,6 @@ export default function Gameselection () {
           </div>
           <button type="button" className="btn btn-outline-dark btn-sm">View All</button>    
       </div>
-        </Layout>
+   
     )
 }

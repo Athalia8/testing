@@ -1,7 +1,6 @@
-import Layout from "../Layout";
+
 // import { query, collection, getDocs } from "firebase/firestore";
 // import { db } from "../../../firebase/config"
-import Link from 'next/link'
 
 export default function Category () {
 //     const [orders, setOrders] = useState([]);
@@ -21,8 +20,7 @@ export default function Category () {
 //   }, []);
 
     return (
-        <Layout>
-        <div className="container text-center mx-autos background">
+        <div className="container text-center mx-autos">
   <div className="row gx-5">
     <div className="col">
       <div className="p-3 border bg-light">Top Playing Game</div>
@@ -49,8 +47,8 @@ export default function Category () {
      </button>
     </div>
     <div className="col">
-    <button type="button" className="btn">
       <div className="p-3 border bg-light">Coming Soon</div>
+      <button type="button" className="btn">
      <img src="https://i.pinimg.com/564x/4c/ab/fa/4cabfaf5434bfc2fcd1e73898f9554bb.jpg"  className='pilihan' alt='action game' /> 
      </button>
      <button type="button" className="btn">
@@ -62,6 +60,5 @@ export default function Category () {
     </div>
   </div>
 </div>
-</Layout>
     )
 }

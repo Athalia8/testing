@@ -1,9 +1,9 @@
-import Layout from "../Layout"
+
 // import Link from 'next/link'
 
 export default function Slidevent () {
     return (
-        <Layout>
+
             <div className="container-fluid">
         <div
         id="carouselExampleCaptions"
@@ -75,6 +75,5 @@ export default function Slidevent () {
         </button>
       </div>
       </div>
-      </Layout>
     )
 }
