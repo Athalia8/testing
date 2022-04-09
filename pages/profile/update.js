@@ -36,7 +36,7 @@ export default function ProfileUpdate() {
                   <Input type="password" name="password" placeholder="Password" />
                 </FormGroup>
                 <div className="text-center">
-                  <Button>Save</Button>
+                  <Button color="primary">Save</Button>
                 </div>
               </Form>
             </Col>

@@ -12,9 +12,7 @@
     margin: 50px auto
     
 }
-.content {
-  max-width: 42%;
-}
+
 .btn_img {
   width: 20px;
   height: 20px;
@@ -22,63 +20,28 @@
   margin-right: 5px;
 }
 
-@keyframes flying {
-    0% {
-        bottom: -100px;
-        transform: translateX(0)
-    }
-
-    50% {
-        transform: translateX(100px)
-    }
-
-    100% {
-        bottom: 1080px;
-        transform: translateX(-250px)
-    }
-}
-
-.btn {
-    border: none;
-    box-shadow: 0 2px 3px #505050b0;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    font-weight: 500;
-    letter-spacing: 1.3px;
-    background-color: #fff
-
-}
 
 .form_card {
     height: 100%;
     padding: 15px 20px;
-    background-color: #eeeeee;    
-    min-width: 320px;
+    background-color: white;    
+    min-width: 350px;
     max-width: 400px;
-    height: 400px;
+    height: 480px;
     border: none;
     overflow: hidden;
     border-radius: 5px;
-    box-shadow: 0 5px 15px #975ccfa1
+    box-shadow: 0 5px 15px;
+    margin-left: 20px;
+    margin-bottom: 30px;
 }
 
-
-@media (max-width: 767.5px) {
-    .content {
-        max-width: 100%;
-        margin-bottom: 30px;
-        padding: 15px;
-        margin-right: 0px
-    }
-    .card {
-        margin-left: 0
-    }
-
-}
-
-@media (max-width: 550px) {
+@media (max-width: 997px) {
     .content {
         display: none;
+    }
+    .form_card {
+      margin-left: 0;
     }
 }
 
