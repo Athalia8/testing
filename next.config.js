@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 
 module.exports = {
+  images: {
+    domains: ['assets.example.com'],
+  },
   env: {
     apiKey: "AIzaSyCgeXImMnFbA5qdDGmylKVduxZZSg8imlU",
     authDomain: "auth-ix.firebaseapp.com",
