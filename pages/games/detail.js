@@ -7,7 +7,6 @@ export default function GameDetail() {
     <div>
       <NavbarComponent></NavbarComponent>
       <Game />
-      <Footer></Footer>
     </div>
   );
 }
