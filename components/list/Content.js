@@ -54,7 +54,7 @@ const Content = () => {
                   </CardSubtitle>
                   <CardText className={styles.listDate}>{order.release_date}</CardText>
                   {user ? (
-                    <Link href={"/gamedetail/game" + order.id}>
+                    <Link href={"/detailgame/" + order.id}>
                       <Button color="warning" className={styles.listDate}>
                         Game Detail
                       </Button>
