@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Recursive:wght@400;700&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
+
 .container {
   padding: 0 2rem;
 }
@@ -112,5 +115,71 @@
   .grid {
     width: 100%;
     flex-direction: column;
+  }
+}
+
+.detailList {
+  margin-top: 180px;
+  margin-bottom: 180px;
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+  text-align: center;
+  font-weight: 400;
+  font-family: "Recursive", sans-serif;
+}
+.listBgColor {
+  color: rgb(0, 0, 0);
+  font-weight: 400;
+  font-family: "Recursive", sans-serif;
+}
+
+.listBorder {
+  border: 20 !important;
+  border-color: white !important;
+}
+
+.listImgContent {
+  border-radius: 30px 120px 30px 60px !important;
+}
+
+.listCenter {
+  text-align: center;
+}
+
+.listMyFont {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 400;
+  font-family: "Recursive", sans-serif;
+}
+
+@media only screen and (max-width: 575px) {
+  .listImgContent {
+    border-radius: 10px 10px 10px 10px !important
+  }
+  .listMyFont {
+    font-size: 15px;
+  }
+  .listDate {
+    font-size: 13px;
+  }
+  .detailList{
+    font-size: 12px;
+  }
+}
+
+
+@media (min-width: 576px) and (max-width: 768px) { 
+  .listMyFont {
+    font-size: 14px;
+  }
+  .listDate {
+    font-size: 8px;
+  }
+  .listImgContent {
+    border-radius: 15px 20px 15px 20px !important;
+  }
+  .detailList{
+    font-size: 16px;
   }
 }

@@ -1,37 +1,105 @@
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from 'next/router'
+import { Button, Form, FormGroup, Input, Alert } from 'reactstrap';
+import { auth, db } from "../../firebase/config";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { getDoc, doc } from "firebase/firestore";
 
 export default function FormLogin() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [alert, setAlert] = useState("");
+  const [button, setButton] = useState("Login");
+  const router = useRouter()
+
+  const changeEmail = (e) => {
+    const value = e.target.value;
+    setEmail(value);
+    setAlert("");
+  };
+
+  const changePassword = (e) => {
+    const value = e.target.value;
+    setPassword(value);
+    setAlert("");
+  };
+
+  const login = async (e) => {
+    e.preventDefault();
+    if ((email.length, password.length) <= 0) {
+      setAlert("form tidak boleh kosong !!");
+    }
+    else if (password.length < 6) {
+      setAlert("Password minimal 6 karakter !!");
+    }
+    else {
+      try {
+        setButton("Process...")
+        const res = await signInWithEmailAndPassword(auth, email, password);
+        const user = res.user;
+        // const docRef = doc(db, "users", user.uid);
+        // const docSnap = await getDoc(docRef);
+        // if (docSnap.exists()) {
+        //   const data = {
+        //     token: user.accessToken,
+        //     uid: docSnap.id,
+        //     username: docSnap.data().username,
+        //     pp: docSnap.data().profile_picture,
+        //     authBy: docSnap.data().authProvider,
+        //     email: docSnap.data().email,
+        //   }
+        setAlert("Login Berhasil");
+        console.log(user)
+        console.log(user.accessToken)
+        router.push("/home")
+        // } else {
+        //   setAlert("Data tidak ditemukan");
+        // }
+      } catch (error) {
+        setAlert(error.message);
+      }
+
+    }
+  };
+
   return (
-    <div>
-      <div className="card-form">
-        <p className="text-center text-muted fs-08 mt-3">Or sign in with credentials</p>
-        <div className="d-flex align-items-center mb-2">
-          <span className="far fa-envelope text-muted mx-1" />
-          <input
-            type="email"
-            placeholder="Email"
-            className="form-control"
-            required
-          />
-        </div>
-        <div className="d-flex align-items-center mb-2">
-          <span className="fas fa-key text-muted mx-1" />
-          <input
-            type="password"
-            placeholder="Password"
-            className="form-control"
-            required
-          />
-        </div>
-        <div className="d-flex justify-content-center">
-          <button className="btn btn-primary mt-3">Login</button>
-        </div>
-        <div class="text-center fs-6">
-          <Link href="#"><a>Forget password? </a></Link>
-          or
-          <Link href="/register"><a> Register</a></Link>
-        </div>
+    <Form>
+      {
+        alert ? (<Alert color="primary" className="text-center">{alert}</Alert>)
+          :
+          (<Alert color="light" className="text-center">
+            Or sign in with credentials
+          </Alert>)
+      }
+      <FormGroup className="d-flex align-items-center">
+        <span className="far fa-envelope text-muted mx-1" />
+        <Input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={changeEmail}
+          required
+        />
+      </FormGroup>
+      <FormGroup className="d-flex align-items-center">
+        <span className="fas fa-key text-muted mx-1" />
+        <Input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={changePassword}
+          required
+        />
+      </FormGroup>
+      <div className="text-center">
+        <Button onClick={login} color="primary">{button}</Button>
       </div>
-    </div>
+      <div class="text-center mt-3">
+        <Link href="#"><a>Forget password? </a></Link>
+        or
+        <Link href="/register"><a> Register</a></Link>
+      </div>
+    </Form>
   )
 }

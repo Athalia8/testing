@@ -16,7 +16,7 @@ a {
 }
 
 /* gameselection */
-.Gameslider{
+/* .Gameslider{
   width: 100%;
   margin: 4rem 0;
   text-align: center;
@@ -69,7 +69,7 @@ a {
   .Gameslider> div p {
       margin: 1rem .5rem;
   }
-}
+} */
 
 .pilihan {
   margin: 1rem .5rem;
@@ -120,3 +120,36 @@ a {
 
 
 
+
+.test {
+  text-align: center;
+  padding-left: 5% !important;
+  padding-right: 5% !important;
+}
+.test2 {
+  padding-top: 5% !important;
+  padding-bottom: 5% !important;
+}
+.active {
+  background-color: grey;
+}
+
+@media screen and (min-width: 768px) {
+  .banner {
+    margin: auto;
+    width: 25% !important;
+    /* padding: 48px !important; */
+    background-color: green;
+    -ms-transform: rotate(-20deg); /* IE 9 */
+    transform: rotate(-20deg);
+  }
+}
+@media screen and (max-width: 767px) {
+  .banner {
+    margin: auto;
+    width: 25% !important;
+    background-color: green;
+    -ms-transform: rotate(-20deg); /* IE 9 */
+    transform: rotate(-20deg);
+  }
+}
