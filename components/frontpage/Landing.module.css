@@ -100,3 +100,14 @@
     height:fit-content;
     width: fit-content;
 }
+
+/* STYLE CSS MODULE YG DIPAKAI */
+.about {
+  background-color: #9492cc;
+}
+
+.imgCarousel{
+  display: flex;
+  width: 100%;
+  height: 40%;
+}

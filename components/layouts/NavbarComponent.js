@@ -58,7 +58,7 @@ export default function NavbarComponent() {
             <NavItem><Link href="/home"><a className="nav-link">Home</a></Link></NavItem>
             <NavItem><Link href="/games/list"><a className="nav-link">Game List</a></Link></NavItem>
           </Nav>
-          <Nav className="mx-auto" navbar>
+          <Nav className=" d-flex" navbar>
             <Ternary />
           </Nav>
         </Collapse>
