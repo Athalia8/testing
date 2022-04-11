@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Form, FormGroup, Input, Alert } from 'reactstrap';
+import { useRouter } from 'next/router'
 import Link from "next/link";
 import { auth, db } from "../../firebase/config";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
@@ -11,6 +12,7 @@ export default function FormRegister() {
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState("");
   const [button, setButton] = useState("Register");
+  const router = useRouter()
 
   const changeUsername = (e) => {
     const value = e.target.value;
@@ -68,8 +70,9 @@ export default function FormRegister() {
           authProvider: "local",
           updatedAt: new Date(),
         });
-        localStorage.setItem("token", user.accessToken);
+        // localStorage.setItem("token", user.accessToken);
         setAlert("Registrasi berhasil, silahkan Login");
+        router.push("/login")
       } catch (err) {
         setAlert(err.message);
       }

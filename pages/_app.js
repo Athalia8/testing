@@ -1,4 +1,3 @@
-import "../styles/globals.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "../redux/reducers/rootReducer";
