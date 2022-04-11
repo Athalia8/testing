@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { Table } from "reactstrap";
-//import { db } from "../../firebase/config";
 import Link from "next/link";
-//import { collection, getDocs, query, orderBy } from "firebase/firestore";
 
 const Leaderboards = ({ leaderboards, leaderboards_id }) => {
   const [items, setItems] = useState([]);
@@ -12,15 +10,14 @@ const Leaderboards = ({ leaderboards, leaderboards_id }) => {
     setItems(leaderboards);
     setIds(leaderboards_id);
   }, [leaderboards]);
-
   const slides = items.map((item, idx) => {
     return (
       <tr key={idx + 1}>
         <th scope="row">{idx + 1}</th>
         <td>
-          <Link href={"/profile/" + ids[idx]}>{item.name}</Link>
+          <Link href={"/profile/" + ids[idx]}>{item.username}</Link>
         </td>
-        <td>{item.total_playtime} hours</td>
+        <td>{item.total}</td>
       </tr>
     );
   });
@@ -71,35 +68,5 @@ const Leaderboards = ({ leaderboards, leaderboards_id }) => {
     </div>
   );
 };
-
-// class Leaderboards extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = { activeIndex: 0, items: [], DataisLoaded: false, ids: [] };
-//   }
-
-//   async fetch() {
-//     var temp = [];
-//     var tempid = [];
-//     const q = query(collection(db, "leaderboards"), orderBy("total_playtime", "desc"));
-//     const querySnapshot = await getDocs(q);
-//     querySnapshot.forEach((doc) => {
-//       temp.push(doc.data());
-//       tempid.push(doc.id);
-//     });
-//     this.setState({
-//       items: temp,
-//       ids: tempid,
-//     });
-//   }
-
-//   componentDidMount() {
-//     this.fetch();
-//   }
-//   render() {
-//     const { items, ids } = this.state;
-
-//   }
-// }
 
 export default Leaderboards;

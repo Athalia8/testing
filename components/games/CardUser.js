@@ -43,13 +43,11 @@ const CardUser = ({ detailGame3, detailGame4 }) => {
   }
 
   return (
-    <div>
+    <div className="mt-2">
       <h3>Score</h3>
       <div
         style={{
           display: "block",
-          width: 400,
-          height: 180,
         }}
       >
         <Card>

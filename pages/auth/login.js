@@ -1,12 +1,26 @@
 import Layout from "../../components/layouts/Layout";
-import styles from '../../components/auth/Auth.module.css'
+import styles from "../../components/auth/Auth.module.css";
 import FormLogin from "../../components/auth/FormLogin";
 import SignFacebook from "../../components/auth/SignFacebook";
 import SignGoogle from "../../components/auth/SignGoogle";
 import Content from "../../components/auth/Content";
-import { Container, Col } from 'reactstrap';
+import { Container, Col } from "reactstrap";
+import Router, { useRouter } from "next/router";
+import { connect } from "react-redux";
+import { useEffect } from "react";
 
-export default function Login() {
+function Login(props) {
+  const { authError, auth, token } = props;
+  const router = useRouter();
+  // console.log(token);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    //console.log(token);
+    if (token) {
+      //console.log("tes");
+      Router.push("/home");
+    }
+  }, []);
   return (
     <Layout title="Login">
       <Container>
@@ -29,3 +43,19 @@ export default function Login() {
     </Layout>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    authError: state.auth.authError,
+    auth: state.firebase.auth,
+    token: state.auth.token,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signIn: (creds) => dispatch(signIn(creds)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
