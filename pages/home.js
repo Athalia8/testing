@@ -6,6 +6,9 @@ import Updates from "../components/home/Updates";
 import { Container, Row, Col } from "reactstrap";
 import { collection, getDocs, query, limit, orderBy } from "firebase/firestore";
 import { db } from "../firebase/config";
+import { connect } from "react-redux";
+import Router from "next/router";
+import { useEffect } from "react";
 
 export async function getServerSideProps(context) {
   var temp = [];
@@ -22,7 +25,7 @@ export async function getServerSideProps(context) {
     tempid.push(doc.id);
   });
 
-  const q2 = query(collection(db, "leaderboards"), orderBy("total_playtime", "desc"));
+  const q2 = query(collection(db, "rps_game_points"), orderBy("total", "desc"), limit(5));
   const querySnapshot2 = await getDocs(q2);
   querySnapshot2.forEach((doc) => {
     leaderboards.push(doc.data());
@@ -48,7 +51,20 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function Home({ idss, itemss, leaderboards, leaderboards_id, updates, updates_id }) {
+function Home({ idss, itemss, leaderboards, leaderboards_id, updates, updates_id }) {
+  // const { token, auth } = props;
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    //console.log(token);
+    if (!token) {
+      //console.log("tes");
+      Router.push("/auth/login");
+    }
+  }, []);
   return (
     <Layout title="Home">
       <Container>
@@ -72,3 +88,13 @@ export default function Home({ idss, itemss, leaderboards, leaderboards_id, upda
     </Layout>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    authError: state.auth.authError,
+    auth: state.firebase.auth,
+    token: state.auth.token,
+  };
+};
+
+export default connect(mapStateToProps, null)(Home);

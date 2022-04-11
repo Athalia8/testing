@@ -57,7 +57,7 @@ export default function GameDetail({ detailGame, detailGame2, detailGame3, detai
       <Layout title="Game detail">
         <Container>
           <Row>
-            <Col sm={8} style={{ height: "220px" }}>
+            <Col sm={8}>
               <ImgDetail detailGame={detailGame} />
             </Col>
             <Col sm={4}>

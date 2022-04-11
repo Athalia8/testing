@@ -13,6 +13,11 @@ const LastPlayedGame = ({ itemss, idss }) => {
     setIds(idss);
   }, [itemss]);
 
+  const getChildContext = () => {
+    return {
+      color: "#FFFFFF",
+    };
+  };
   const next = () => {
     if (animating) return;
     const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
