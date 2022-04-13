@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.css";
+import "../styles/globals.css";
 import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "../redux/reducers/rootReducer";
 import { Provider } from "react-redux";
