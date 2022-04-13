@@ -7,51 +7,60 @@ import { signOut } from "../../redux/actions/authActions";
 function NavbarComponent(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [displayName, setDisplayName] = useState("");
-  //const [score, setScore] = useState("");
+  const [score, setScore] = useState("");
   const [photoURL, setPhotoURL] = useState("");
   const [uid, setUid] = useState("");
   const { scoreRedux, scoreRedux2 } = props;
 
-  console.log("score1 = " + scoreRedux, "score2 = " + scoreRedux2)
-
-  const getUser = () => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      const user = JSON.parse(localStorage.getItem('user'));
-      // console.log(user)
-      setDisplayName(user.displayName);
-      setPhotoURL(user.photoURL);
-      setUid(user.uid);
-    }
-  }
+  // const user = auth.currentUser;
 
   useEffect(() => {
-    getUser()
-  }, [scoreRedux, scoreRedux2]);
+    const token = localStorage.getItem("token");
+    const test = JSON.parse(localStorage.getItem("user"));
+    const _score = localStorage.getItem("score");
+    if (token) {
+      setDisplayName(test.displayName);
+      setPhotoURL(test.photoURL);
+      setUid(test.uid);
+      if (_score === null) {
+        setScore(0);
+      } else {
+        setScore(localStorage.getItem("score"));
+      }
+    }
+    if (score !== scoreRedux2 && scoreRedux2 !== -1) {
+      localStorage.setItem("score", scoreRedux2);
+      setScore(scoreRedux2);
+    }
+  }, [scoreRedux2]);
 
   const changeToggle = () => {
     setIsOpen(!isOpen);
   };
-
+  // const logout = () => {
+  //   signOut(auth);
+  //   router.push("/login");
+  //   console.log("Logout berhasil");
+  // };
+  // console.log(score, scoreRedux2);
   const Ternary = () => {
     if (displayName !== null && displayName !== "") {
       return (
         <>
-          {
-            photoURL ? (
-              <NavItem>
-                <img src={photoURL} alt="Profile" width={40} height={40} />
-              </NavItem>
-            ) : (
-              <NavItem>
-                <img src="/user.png" alt="Profile" width={40} height={40} />
-              </NavItem>
-            )
-          }
+          {photoURL ? (
+            <NavItem>
+              <img src={photoURL} alt="Profile" width={40} height={40} />
+            </NavItem>
+          ) : (
+            <NavItem>
+              <img src="/user.png" alt="Profile" width={40} height={40} />
+            </NavItem>
+          )}
           <NavItem>
             <Link href={"/profile/" + [uid]}>
               <a className="nav-link">
-                {displayName} ({scoreRedux !== "" ? scoreRedux : scoreRedux2 !== "" ? scoreRedux2 : 0})
+                {displayName} (
+                {scoreRedux2 === -1 ? score : score !== scoreRedux2 && scoreRedux2 >= 0 ? scoreRedux2 : scoreRedux2})
               </a>
             </Link>
           </NavItem>

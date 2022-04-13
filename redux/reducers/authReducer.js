@@ -1,9 +1,8 @@
 if (typeof window !== "undefined") {
   var scoreRedux = JSON.parse(localStorage.getItem("score"));
 } else {
-  var scoreRedux = 0;
+  var scoreRedux = -1;
 }
-
 const initState = {
   authError: "",
   buttonLogin: "Login",
@@ -43,6 +42,9 @@ const authReducer = (state = initState, action) => {
         buttonLogin: "Login",
       };
     case "LOGIN_SUCCESS":
+      if (scoreRedux === -1) {
+        scoreRedux = action.score;
+      }
       return {
         ...state,
         token: action.token,

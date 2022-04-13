@@ -9,6 +9,14 @@ const LastPlayedGame = ({ itemss, idss }) => {
   const [ids, setIds] = useState([]);
 
   useEffect(() => {
+    itemss.push({
+      developer: "Kelompok 1",
+      genre: "Classic",
+      name: "Rock Paper Scissor",
+      released_date: "03/25/22",
+      thumbnail: "https://wallpaperaccess.com/full/5777368.png",
+    });
+    idss.push("l9Ay2BQwtsJc7kfgfOp7");
     setItems(itemss);
     setIds(idss);
   }, [itemss]);

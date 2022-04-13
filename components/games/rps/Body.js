@@ -12,6 +12,7 @@ var cpu = "";
 // var round = 1;
 var history_score;
 var history_id;
+var level;
 
 const GameBody = (props) => {
   const { round, score } = props;
@@ -45,7 +46,7 @@ const GameBody = (props) => {
         created_at: new Date(),
       });
       getHistory(score);
-      dispatch(finish(score));
+
       swal({
         title: "Game Over",
         text: "Thank you for playing, Your final score is " + score,
@@ -76,6 +77,8 @@ const GameBody = (props) => {
       // doc.data() is never undefined for query doc snapshots
       history_score = doc.data().total;
       history_id = doc.id;
+
+      dispatch(finish(parseInt(history_score) + currScore));
       updateHistory(currScore);
     });
     if (valid) {
@@ -84,12 +87,18 @@ const GameBody = (props) => {
           total: currScore,
           game: "Rock Paper Scissors",
           username: props.data.username,
-          updated_at: new Date(),
+          updated_at: "2022-04-16 20:00:00",
         });
       } catch (error) {
         //console.log("upadate failed");
         //console.log(error.message);
       }
+    }
+
+    if (parseInt(history_score) + currScore >= 25) {
+      updateLevel("Middle");
+    } else if (parseInt(history_score) + currScore >= 50) {
+      updateLevel("Expert");
     }
   }
 
@@ -99,8 +108,16 @@ const GameBody = (props) => {
       total: parseInt(history_score) + currScore,
     });
   }
+
+  async function updateLevel(level) {
+    const data = doc(db, "users", uid);
+    await updateDoc(data, {
+      level: level,
+    });
+  }
+
   const check = () => {
-    let arr = ["batu", "gunting", "kertas"];
+    let arr = ["gunting", "gunting", "gunting"];
     cpu = arr[Math.floor(Math.random() * arr.length)];
     //console.log("CPU memilih " + cpu);
 
@@ -362,7 +379,7 @@ const mapDispatchToProps = (dispatch) => {
     addScore: () => dispatch(addScore()),
     resetScore: () => dispatch(resetScore()),
     restart: () => dispatch(restart()),
-    finish: (score) => dispatch(finish(score)),
+    finish: (current_score) => dispatch(finish(current_score)),
   };
 };
 

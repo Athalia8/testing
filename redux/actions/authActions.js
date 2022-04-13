@@ -5,6 +5,7 @@ import Router from "next/router";
 import swal from "sweetalert";
 
 export const signIn = (credentials) => {
+  var score = 0;
   const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
   return async (dispatch, getState, { getFirebase }) => {
@@ -24,8 +25,8 @@ export const signIn = (credentials) => {
           email: res.user.email,
           photoURL: res.user.photoURL,
         };
-        localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('token', res.user.accessToken);
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("token", res.user.accessToken);
 
         const docRef2 = doc(db, "rps_game_points", user.uid);
         const docSnap2 = await getDoc(docRef2);
@@ -37,16 +38,16 @@ export const signIn = (credentials) => {
         Router.push("/home");
       } catch (error) {
         switch (error.code) {
-          case 'auth/user-not-found':
+          case "auth/user-not-found":
             swal({ icon: "error", text: "Email tidak terdaftar" });
             dispatch({ type: "AUTH_ERROR" });
             break;
-          case 'auth/wrong-password':
+          case "auth/wrong-password":
             swal({ icon: "error", text: "Password anda salah" });
             dispatch({ type: "AUTH_ERROR" });
             break;
           default:
-            swal({ icon: "error", text: error.code })
+            swal({ icon: "error", text: error.code });
         }
       }
     }

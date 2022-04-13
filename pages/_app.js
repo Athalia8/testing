@@ -4,6 +4,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "../redux/reducers/rootReducer";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
+import "../styles/globals.css";
 import { createFirestoreInstance } from "redux-firestore";
 import { ReactReduxFirebaseProvider, getFirebase } from "react-redux-firebase";
 import app from "../firebase/config";

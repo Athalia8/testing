@@ -11,9 +11,9 @@ export default function Layout(props) {
       </Head>
       {props.title === "Login" || props.title === "Register" ? "" : <NavbarComponent />}
       {props.title === "Login" || props.title === "Register" ? (
-        <div className="mt-5">{props.children}</div>
-      ) : (
         <div className="mt-2">{props.children}</div>
+      ) : (
+        <div style={{ marginTop: "4rem !important;" }}>{props.children}</div>
       )}
 
       {props.title == "Login" || props.title === "Register" ? "" : <Footer />}

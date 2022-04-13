@@ -11,17 +11,16 @@ const RPS = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    //console.log(token);
+    const user = JSON.parse(localStorage.getItem("user"));
     if (!token) {
       //console.log("tes");
       Router.push("/auth/login");
     } else {
-      setDisplayName(localStorage.getItem("username"));
-      setEmail(localStorage.getItem("email"));
-      setUid(localStorage.getItem("uid"));
+      setEmail(user.email);
+      setDisplayName(user.displayName);
+      setUid(user.uid);
     }
   }, []);
-
   return (
     <div>
       <Layout title="RPS">
