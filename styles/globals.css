@@ -75,3 +75,7 @@ a {
   text-align: center;
   color: #61534e;
 }
+
+.mt-6{
+  margin-top: 4rem !important;
+}
