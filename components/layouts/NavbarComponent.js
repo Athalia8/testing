@@ -1,10 +1,6 @@
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from "reactstrap";
-import { useRouter } from "next/router";
 import Link from "next/link";
-import Image from "next/image";
 import { useState, useEffect } from "react";
-// import { signOut } from "firebase/auth";
-import { auth } from "../../firebase/config";
 import { connect } from "react-redux";
 import { signOut } from "../../redux/actions/authActions";
 
@@ -14,40 +10,48 @@ function NavbarComponent(props) {
   //const [score, setScore] = useState("");
   const [photoURL, setPhotoURL] = useState("");
   const [uid, setUid] = useState("");
-  const router = useRouter();
   const { scoreRedux, scoreRedux2 } = props;
 
-  const user = auth.currentUser;
-  useEffect(() => {
+  console.log("score1 = " + scoreRedux, "score2 = " + scoreRedux2)
+
+  const getUser = () => {
     const token = localStorage.getItem("token");
     if (token) {
-      setDisplayName(localStorage.getItem("username"));
-      setPhotoURL(localStorage.getItem("pp"));
-      setUid(localStorage.getItem("uid"));
-      //setScore(localStorage.getItem("score"));
+      const user = JSON.parse(localStorage.getItem('user'));
+      // console.log(user)
+      setDisplayName(user.displayName);
+      setPhotoURL(user.photoURL);
+      setUid(user.uid);
     }
+  }
+
+  useEffect(() => {
+    getUser()
   }, [scoreRedux, scoreRedux2]);
 
   const changeToggle = () => {
     setIsOpen(!isOpen);
   };
-  // const logout = () => {
-  //   signOut(auth);
-  //   router.push("/login");
-  //   console.log("Logout berhasil");
-  // };
 
   const Ternary = () => {
     if (displayName !== null && displayName !== "") {
       return (
         <>
-          <NavItem>
-            <img src={photoURL} alt="Profile" width={40} height={40} />
-          </NavItem>
+          {
+            photoURL ? (
+              <NavItem>
+                <img src={photoURL} alt="Profile" width={40} height={40} />
+              </NavItem>
+            ) : (
+              <NavItem>
+                <img src="/user.png" alt="Profile" width={40} height={40} />
+              </NavItem>
+            )
+          }
           <NavItem>
             <Link href={"/profile/" + [uid]}>
               <a className="nav-link">
-                {displayName} ({scoreRedux === scoreRedux2 ? scoreRedux : scoreRedux2})
+                {displayName} ({scoreRedux !== "" ? scoreRedux : scoreRedux2 !== "" ? scoreRedux2 : 0})
               </a>
             </Link>
           </NavItem>
@@ -76,7 +80,7 @@ function NavbarComponent(props) {
     }
   };
   return (
-    <div className="px-lg-5 shadow bg-light rounded">
+    <div className="px-lg-5 shadow bg-light rounded fixed-top">
       <Navbar color="light" light expand="md">
         <Link href="/">
           <a className="navbar-brand">Gaming Platform</a>
