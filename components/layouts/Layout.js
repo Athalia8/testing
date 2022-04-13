@@ -13,7 +13,7 @@ export default function Layout(props) {
       {props.title === "Login" || props.title === "Register" ? (
         <div className="mt-2">{props.children}</div>
       ) : (
-        <div style={{ marginTop: "4rem !important" }}>{props.children}</div>
+        <div className="mt-6">{props.children}</div>
       )}
 
       {props.title == "Login" || props.title === "Register" ? "" : <Footer />}
