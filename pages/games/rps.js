@@ -17,8 +17,8 @@ const RPS = () => {
       Router.push("/auth/login");
     } else {
       setEmail(user.email);
-      setDisplayName(user.username);
-      setUid(localStorage.getItem("uid"));
+      setDisplayName(user.displayName);
+      setUid(user.uid);
     }
   }, []);
   return (

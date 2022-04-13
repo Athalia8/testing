@@ -4,10 +4,9 @@ if (typeof window !== "undefined") {
   var scoreRedux = -1;
 }
 const initState = {
-  authError: null,
+  authError: "",
   buttonLogin: "Login",
-  alertLogin: "",
-  scoreRedux: scoreRedux || "",
+  scoreRedux: scoreRedux || "0",
 };
 
 const authReducer = (state = initState, action) => {
@@ -16,6 +15,12 @@ const authReducer = (state = initState, action) => {
       return {
         ...state,
         authError: "Form tidak boleh kosong !!",
+        buttonLogin: "Login",
+      };
+    case "INVALID_EMAIL":
+      return {
+        ...state,
+        authError: "Masukkan alamat email yang valid !!",
         buttonLogin: "Login",
       };
     case "LESS_PASSWORD":
@@ -27,13 +32,13 @@ const authReducer = (state = initState, action) => {
     case "LOGIN_PROCESS":
       return {
         ...state,
-        authError: null,
+        authError: "",
         buttonLogin: "Process..",
       };
-    case "LOGIN_ERROR":
+    case "AUTH_ERROR":
       return {
         ...state,
-        authError: "Incorrect Password or Email",
+        authError: "",
         buttonLogin: "Login",
       };
     case "LOGIN_SUCCESS":
@@ -42,17 +47,16 @@ const authReducer = (state = initState, action) => {
       }
       return {
         ...state,
-        authError: null,
         token: action.token,
-        alertLogin: "Login Berhasil",
+        authError: "",
         buttonLogin: "Welcome",
-        scoreRedux: scoreRedux,
+        // scoreRedux: score,
       };
     case "LOGOUT_SUCCESS":
       return {
         ...state,
         token: action.token,
-        alertLogin: "",
+        authError: "",
         buttonLogin: "Login",
       };
     default:

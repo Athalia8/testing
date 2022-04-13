@@ -87,7 +87,7 @@ const GameBody = (props) => {
           total: currScore,
           game: "Rock Paper Scissors",
           username: props.data.username,
-          updated_at: new Date(),
+          updated_at: "2022-04-16 20:00:00",
         });
       } catch (error) {
         //console.log("upadate failed");
@@ -117,7 +117,7 @@ const GameBody = (props) => {
   }
 
   const check = () => {
-    let arr = ["batu", "gunting", "kertas"];
+    let arr = ["gunting", "gunting", "gunting"];
     cpu = arr[Math.floor(Math.random() * arr.length)];
     //console.log("CPU memilih " + cpu);
 
