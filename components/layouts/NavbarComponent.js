@@ -11,22 +11,28 @@ import { signOut } from "../../redux/actions/authActions";
 function NavbarComponent(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [displayName, setDisplayName] = useState("");
-  //const [score, setScore] = useState("");
+  const [score, setScore] = useState("");
   const [photoURL, setPhotoURL] = useState("");
   const [uid, setUid] = useState("");
   const router = useRouter();
   const { scoreRedux, scoreRedux2 } = props;
 
   const user = auth.currentUser;
+
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const test = JSON.parse(localStorage.getItem("user"));
     if (token) {
-      setDisplayName(localStorage.getItem("username"));
-      setPhotoURL(localStorage.getItem("pp"));
+      setDisplayName(test.username);
+      setPhotoURL(test.profile_picture);
       setUid(localStorage.getItem("uid"));
-      //setScore(localStorage.getItem("score"));
+      setScore(JSON.parse(localStorage.getItem("score")));
     }
-  }, [scoreRedux, scoreRedux2]);
+    if (score !== scoreRedux2 && scoreRedux2 !== -1) {
+      localStorage.setItem("score", scoreRedux2);
+      setScore(scoreRedux2);
+    }
+  }, [scoreRedux2]);
 
   const changeToggle = () => {
     setIsOpen(!isOpen);
@@ -36,7 +42,7 @@ function NavbarComponent(props) {
   //   router.push("/login");
   //   console.log("Logout berhasil");
   // };
-
+  console.log(score, scoreRedux2);
   const Ternary = () => {
     if (displayName !== null && displayName !== "") {
       return (
@@ -47,7 +53,8 @@ function NavbarComponent(props) {
           <NavItem>
             <Link href={"/profile/" + [uid]}>
               <a className="nav-link">
-                {displayName} ({scoreRedux === scoreRedux2 ? scoreRedux : scoreRedux2})
+                {displayName} (
+                {scoreRedux2 === -1 ? score : score !== scoreRedux2 && scoreRedux2 >= 0 ? scoreRedux2 : scoreRedux2})
               </a>
             </Link>
           </NavItem>

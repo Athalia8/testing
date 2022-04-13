@@ -1,13 +1,7 @@
-if (typeof window !== "undefined") {
-  var scoreRedux = JSON.parse(localStorage.getItem("score"));
-} else {
-  var scoreRedux = 0;
-}
-
 const initState = {
   round: 1,
   score: 0,
-  scoreRedux: scoreRedux || "",
+  scoreRedux: -1,
 };
 
 const gameReducer = (state = initState, action) => {
@@ -35,7 +29,7 @@ const gameReducer = (state = initState, action) => {
     case "GAME_FINISHED":
       return {
         ...state,
-        scoreRedux: scoreRedux + action.score,
+        scoreRedux: action.score,
       };
     default:
       return state;
