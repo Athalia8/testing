@@ -7,25 +7,25 @@ import { connect, useDispatch } from "react-redux";
 function FormLogin(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [alert, setAlert] = useState("");
-  const [button, setButton] = useState("Login");
+  const [alertLogin, setAlertLogin] = useState("");
+  // const [button, setButton] = useState("Login");
   const { buttonLogin, authError } = props;
 
   useEffect(() => {
-    setButton(buttonLogin);
-    setAlert(authError);
+    // setButton(buttonLogin);
+    setAlertLogin(authError);
   }, [buttonLogin, authError]);
 
   const changeEmail = (e) => {
     const value = e.target.value;
     setEmail(value);
-    setAlert("");
+    setAlertLogin("");
   };
 
   const changePassword = (e) => {
     const value = e.target.value;
     setPassword(value);
-    setAlert("");
+    setAlertLogin("");
   };
 
   const handleSubmit = async (e) => {
@@ -37,9 +37,9 @@ function FormLogin(props) {
     <Form>
       <div className="py-0">
         {
-          alert ? (<Alert color="danger" className="text-center py-1 px-0">
+          alertLogin ? (<Alert color="danger" className="text-center py-1 px-0">
             <span className="fas fa-exclamation-triangle mx-1" />
-            {alert}</Alert>)
+            {alertLogin}</Alert>)
             :
             (<Alert color="light" className="text-center py-1">or</Alert>)
         }
@@ -61,7 +61,7 @@ function FormLogin(props) {
         <Input type="password" placeholder="Password" value={password} onChange={changePassword} required />
       </FormGroup>
       <div className="text-center mb-3">
-        <Button onClick={handleSubmit} color="primary">{button}</Button>
+        <Button onClick={handleSubmit} color="primary">{buttonLogin}</Button>
       </div>
       <div className="text-center mt-3">
         <Link href="/auth/forgot"><a className="text-decoration-none text-primary">Forget password? </a></Link>

@@ -1,39 +1,56 @@
 import { Button } from "reactstrap";
 import { useEffect, useState } from "react";
 import { Badge, Table } from "reactstrap";
-import { auth } from "../../firebase/config";
 import Link from "next/link";
-// import Image from "next/image"
+import { connect } from "react-redux";
 
-function UserDetail() {
+function UserDetail(props) {
   const [dataUser, setDataUser] = useState([])
+  const [score, setScore] = useState([])
+  const { scoreRedux2 } = props;
 
-  // const data = []
-  // const user = auth.currentUser
   const getUser = () => {
     const token = localStorage.getItem("token");
     if (token) {
       const user = JSON.parse(localStorage.getItem('user'));
-      // console.log(user)
       setDataUser(user);
     }
   }
 
   useEffect(() => {
-    // data.push(user)
-    // setDataUser(data[0])
     getUser()
-  }, [])
+    const token = localStorage.getItem("token");
+    const _score = localStorage.getItem("score");
+    if (token) {
+      if (_score === null) {
+        setScore(0);
+      } else {
+        setScore(localStorage.getItem("score"));
+      }
+    }
+    if (score !== scoreRedux2 && scoreRedux2 !== -1) {
+      localStorage.setItem("score", scoreRedux2);
+      setScore(scoreRedux2);
+    }
+  }, [scoreRedux2])
   return (
     <div>
       <div className="mt-4 text-center">
-        <img
-          src={dataUser.photoURL}
-          alt="Profile"
-          width={250}
-          height={250}
-        />
-        <h3>{dataUser.displayName}</h3>
+        {
+          dataUser.photoURL ? (
+            <img src={dataUser.photoURL} alt="Profile" width={250} height={250} />
+          ) : (
+            <img src="/user.png" alt="Profile" width={250} height={250} />
+          )
+        }
+        <div className="justify-item-center">
+          <div className="d-flex">
+            <h3>{dataUser.displayName}</h3><span><Badge color="info" pill>
+              {scoreRedux2 === -1 ? score : score !== scoreRedux2 && scoreRedux2 >= 0 ? scoreRedux2 : scoreRedux2}
+            </Badge></span>
+          </div>
+
+        </div>
       </div>
       <Table size="sm">
         <tbody>
@@ -41,14 +58,6 @@ function UserDetail() {
             <th scope="row">Email</th>
             <td>: {dataUser.email}</td>
           </tr>
-          {/* <tr>
-            <th scope="row">Level</th>
-            <td>: Easy</td>
-          </tr>
-          <tr>
-            <th scope="row">Game Played</th>
-            <td>: Times<Badge pill>12</Badge></td>
-          </tr> */}
         </tbody>
       </Table>
       <div className="mt-2 text-center">
@@ -60,4 +69,11 @@ function UserDetail() {
   )
 }
 
-export default UserDetail
+const mapStateToProps = (state) => {
+  return {
+    scoreRedux: state.auth.scoreRedux,
+    scoreRedux2: state.game.scoreRedux,
+  };
+};
+
+export default connect(mapStateToProps)(UserDetail);

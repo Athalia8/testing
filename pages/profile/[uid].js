@@ -3,6 +3,7 @@ import Layout from "../../components/layouts/Layout";
 import GameRPS from "../../components/profile/GameRPS";
 import Content from "../../components/profile/Content";
 import UserDetail from "../../components/profile/UserDetail";
+import AllUsers from "../../components/profile/AllUsers";
 
 export default function Profile() {
   return (
@@ -16,6 +17,7 @@ export default function Profile() {
             <Col xs="auto" lg="8">
               <Content />
               <GameRPS />
+              <AllUsers />
             </Col>
           </Row>
         </Container>

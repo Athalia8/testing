@@ -4,23 +4,7 @@ import { Table } from "reactstrap"
 import { auth, db } from "../../firebase/config"
 
 export default function GameRPS() {
-  const [dataUser, setDataUser] = useState([])
   const [RPS, setRPS] = useState([])
-
-
-  async function getUsers() {
-    // const docRef = doc(db, "users");
-    // const docSnap = await getDoc(docRef);
-    // if (docSnap.exists()) {
-    //   docSnap.map((doc) => {
-
-    //     console.log(doc.data())
-    //   })
-    // }
-  }
-
-  const data = []
-  const user = auth.currentUser
 
   async function getRPS() {
     try {
@@ -39,8 +23,6 @@ export default function GameRPS() {
 
 
   useEffect(() => {
-    data.push(user)
-    setDataUser(data[0])
     getRPS()
   }, [])
 
@@ -52,7 +34,6 @@ export default function GameRPS() {
           <tr>
             <th>Name</th>
             <th>Score</th>
-            <th>Level</th>
             <th>Last Play</th>
           </tr>
         </thead>
@@ -62,7 +43,6 @@ export default function GameRPS() {
               <tr index={item.id}>
                 <th>{item.username}</th>
                 <td>{item.total} point</td>
-                <td>-</td>
                 <td>{item.updated_at}</td>
               </tr>
             ))

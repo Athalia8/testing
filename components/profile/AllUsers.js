@@ -1,56 +1,56 @@
 import { getAuth } from "firebase/auth";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Table } from "reactstrap";
+import { auth, db } from "../../firebase/config";
 
 function AllUsers() {
   const [users, setUsers] = useState([])
-  const auth = getAuth();
 
-  const data = []
-  const user = auth.currentUser
-
-  data.push(user)
-  // setDataUser(data[0])
-
-  useEffect(() => {
-    if (user !== null) {
-      user.providerData.forEach((profile) => {
-        // const user = {
-        //   Name: profile.displayName,
-        //   Email: profile.email,
-        //   PhotoURL: profile.photoURL,
-        // }
-        // setUsers(profile)
-        console.log("Sign-in provider: " + profile.providerId);
-        console.log("  Provider-specific UID: " + profile.uid);
-        console.log("  Name: " + profile.displayName);
-        console.log("  Email: " + profile.email);
-        console.log("  Photo URL: " + profile.photoURL);
+  async function getUsers() {
+    try {
+      const array = []
+      const q = query(collection(db, "users"), orderBy("level", "desc"));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        array.push(doc.data());
       });
+      setUsers(array);
+    } catch (error) {
+      console.log(error.code)
     }
-    console.log(users)
+  }
+  useEffect(() => {
+    getUsers()
   }, [])
 
   return (
     <div>
+      <hr />
+      <h5 className="text-center">Users Game Rock Paper Scissors Info</h5>
       <Table>
-        {/* <thead>
+        <thead>
           <tr>
-            <th></th>
+            <th>Username</th>
+            <th>Level</th>
+            <th>Provider</th>
           </tr>
-        </thead> */}
+        </thead>
         <tbody>
-          {/* {
+          {
             users.map((user) => (
               <tr index={user.id}>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.photoURL}</td>
+                <td>{user.username}</td>
+                <td>{user.level}</td>
+                <td>{user.authProvider}</td>
               </tr>
             ))
-          } */}
+          }
         </tbody>
       </Table>
+      <br />
+      <br />
+      <br />
     </div>
   )
 }
