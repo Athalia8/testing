@@ -1,4 +1,4 @@
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from "reactstrap";
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Badge } from "reactstrap";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
@@ -59,8 +59,10 @@ function NavbarComponent(props) {
           <NavItem>
             <Link href={"/profile/" + [uid]}>
               <a className="nav-link">
-                {displayName} (
-                {scoreRedux2 === -1 ? score : score !== scoreRedux2 && scoreRedux2 >= 0 ? scoreRedux2 : scoreRedux2})
+                {displayName}
+                <Badge color="primary" pill>
+                  {scoreRedux2 === -1 ? score : score !== scoreRedux2 && scoreRedux2 >= 0 ? scoreRedux2 : scoreRedux2}
+                </Badge>
               </a>
             </Link>
           </NavItem>

@@ -61,5 +61,6 @@ export const signOut = () => {
     const token = null;
     Router.push("/");
     dispatch({ type: "LOGOUT_SUCCESS", token });
+    swal({ text: "Anda berhasil Logout" });
   };
 };

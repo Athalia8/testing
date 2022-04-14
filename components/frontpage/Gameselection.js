@@ -12,21 +12,21 @@ export default function Gameselection() {
       <hr />
       <h3 className='text-center'>Choose your Game Gender</h3>
       <div className="justify-content-center d-flex">
-        <Navbar color="light" light expand="md">
+        <Navbar color="outline" light expand="md">
           <NavbarToggler onClick={changeToggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mx-auto" navbar>
               <NavItem>
-                <NavLink className="mx-5 px-3 btn btn-outline-dark" href="#">Fantasy</NavLink>
+                <NavLink className="mx-5 px-3 btn btn-outline-secondary" href="#">Fantasy</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className="mx-5 px-3 btn btn-outline-dark" href="#">Action</NavLink>
+                <NavLink className="mx-5 px-3 btn btn-outline-secondary" href="#">Action</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className="mx-5 px-3 btn btn-outline-dark" href="#">RGP</NavLink>
+                <NavLink className="mx-5 px-3 btn btn-outline-secondary" href="#">RGP</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className="mx-5 px-3 btn btn-outline-dark" href="#">Thriller</NavLink>
+                <NavLink className="mx-5 px-3 btn btn-outline-secondary" href="#">Thriller</NavLink>
               </NavItem>
             </Nav>
           </Collapse>

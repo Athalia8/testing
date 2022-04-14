@@ -29,6 +29,7 @@ export const signUp = (credentials) => {
         });
         const docRef = doc(db, "users", user.uid);
         await setDoc(docRef, {
+          uid: user.uid,
           username: credentials.username,
           level: "Easy",
           authProvider: "local",
