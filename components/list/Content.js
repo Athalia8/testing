@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { query, collection, getDocs } from "firebase/firestore";
-import { Row, Col } from "reactstrap";
 import Link from "next/link";
 import { db } from "../../firebase/config";
 import {
@@ -46,8 +45,8 @@ const Content = () => {
   return (
     <Container className="pt-5">
       <CardGroup className={styles.listBgColor}>
-        <Row className="pt-3">
-          <Col xs="12" sm="6" md="6" className={styles.listCol}>
+        <div className={styles.listRow}>
+          <div xs="12" sm="6" md="6" className={styles.listCol}>
             {orders.map((order) => (
               <Card className={styles.listBorder} key={order.id}>
                 <CardImg
@@ -87,49 +86,8 @@ const Content = () => {
                 </CardBody>
               </Card>
             ))}
-          </Col>
-          <Col xs="0" sm="6" md="6">
-            {orders.map((order) => (
-              <Card className={styles.listBorder} key={order.id}>
-                <CardImg
-                  className={styles.listImgContent}
-                  alt="Card image cap"
-                  src={order.thumbnail}
-                  top
-                  width="50%"
-                />
-                <CardBody className={styles.listCenter}>
-                  <CardTitle className={styles.listMyFont} tag="h5">
-                    {order.name}
-                  </CardTitle>
-                  <CardSubtitle className="mb-2 text-muted" tag="h6">
-                    <i className="bi bi-star-fill text-danger"></i>
-                    <i className="bi bi-star-fill text-danger"></i>
-                    <i className="bi bi-star-fill text-danger"></i>
-                    <i className="bi bi-star-fill text-danger"></i>
-                    <i className="bi bi-star-half text-danger"></i>
-                  </CardSubtitle>
-                  <CardText className={styles.listDate}>
-                    {order.release_date}
-                  </CardText>
-                  {user ? (
-                    <Link href={"/detailgame/" + order.id}>
-                      <Button color="warning" className={styles.listDate}>
-                        Game Detail
-                      </Button>
-                    </Link>
-                  ) : (
-                    <Link href={"/login"}>
-                      <Button color="warning" className={styles.listDate}>
-                        Game Detail
-                      </Button>
-                    </Link>
-                  )}
-                </CardBody>
-              </Card>
-            ))}
-          </Col>
-        </Row>
+          </div>
+        </div>
       </CardGroup>
     </Container>
   );
