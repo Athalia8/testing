@@ -9,7 +9,7 @@ const ImgDetail = ({ detailGame }) => {
 
   return (
     <div>
-      <img className="img-fluid mt-5" src={data.thumbnail} alt={data.name} />
+      <img className="img-fluid mt-4" src={data.thumbnail} alt={data.name} />
     </div>
   );
 };

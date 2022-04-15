@@ -9,7 +9,7 @@ const Statistics = () => {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            background:#EEEEEE;
+            // background:#EEEEEE;
             font-size:14px;
           }
 
