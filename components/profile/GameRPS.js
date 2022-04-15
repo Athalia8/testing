@@ -29,7 +29,7 @@ export default function GameRPS() {
   return (
     <div>
       <h5 className="text-center">Score Game Rock Paper Scissors</h5>
-      <Table size="sm">
+      <table style={{ width: "100%" }}>
         <thead>
           <tr>
             <th>Name</th>
@@ -48,7 +48,7 @@ export default function GameRPS() {
             ))
           }
         </tbody>
-      </Table>
+      </table>
       {
         RPS == "" ? <p className="text-danger text-center">You haven't played it yet</p> : ''
       }

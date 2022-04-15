@@ -1,11 +1,6 @@
 import { Button } from 'reactstrap';
-// import { useRouter } from 'next/router'
-// import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-// import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
 import styles from './Auth.module.css'
-// import { useEffect, useState } from 'react';
-// import { auth, db } from '../../firebase/config';
-import { signInGoogle } from '../../redux/actions/authGoogleActions';
+import { signInGoogle } from '../../redux/actions/authActions';
 import { connect } from 'react-redux';
 
 function SignGoogle(props) {
@@ -32,7 +27,7 @@ function SignGoogle(props) {
 
 const mapStateToProps = (state) => {
   return {
-    buttonGoogle: state.google.buttonGoogle,
+    buttonGoogle: state.auth.buttonGoogle,
   };
 };
 

@@ -28,6 +28,7 @@
     box-shadow: 0 5px 15px;
     margin-left: 20px;
     margin-bottom: 30px;
+    color: black;
 }
 
 .form_forgot {
@@ -42,6 +43,7 @@
   box-shadow: 0 5px 15px;
   margin-left: 20px;
   margin-bottom: 30px;
+  color: black;
 }
 
 @media (max-width: 997px) {

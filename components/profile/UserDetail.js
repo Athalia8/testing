@@ -38,9 +38,9 @@ function UserDetail(props) {
       <div className="mt-4 text-center">
         {
           dataUser.photoURL ? (
-            <img src={dataUser.photoURL} alt="Profile" width={250} height={250} />
+            <img src={dataUser.photoURL} className="rounded-circle" alt="Profile" width={250} height={250} />
           ) : (
-            <img src="/user.png" alt="Profile" width={250} height={250} />
+            <img src="/user.png" className="rounded-circle" alt="Profile" width={250} height={250} />
           )
         }
         <div className="justify-item-center">
@@ -52,14 +52,14 @@ function UserDetail(props) {
 
         </div>
       </div>
-      <Table size="sm">
+      <table style={{ width: "100%" }}>
         <tbody>
           <tr>
             <th scope="row">Email</th>
             <td>: {dataUser.email}</td>
           </tr>
         </tbody>
-      </Table>
+      </table>
       <div className="mt-2 text-center">
         <Link href={"/profile/update/" + dataUser.uid}>
           <Button color="primary">Update Profile</Button>

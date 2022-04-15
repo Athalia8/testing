@@ -8,13 +8,8 @@ function FormLogin(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alertLogin, setAlertLogin] = useState("");
-  // const [button, setButton] = useState("Login");
-  const { buttonLogin, authError } = props;
-
-  useEffect(() => {
-    // setButton(buttonLogin);
-    setAlertLogin(authError);
-  }, [buttonLogin, authError]);
+  const { buttonLogin } = props;
+  const validRegex = "[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}";
 
   const changeEmail = (e) => {
     const value = e.target.value;
@@ -30,7 +25,15 @@ function FormLogin(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await props.signIn({ email, password });
+    if ((email.length, password.length) <= 0) {
+      setAlertLogin("Form tidak boleh kosong !!");
+    } else if (!email.match(validRegex)) {
+      setAlertLogin("Masukkan alamat email yang valid !!");
+    } else if (password.length <= 5) {
+      setAlertLogin("Password minimal 6 karakter !!");
+    } else {
+      await props.signIn({ email, password });
+    }
   };
 
   return (
@@ -74,8 +77,6 @@ function FormLogin(props) {
 
 const mapStateToProps = (state) => {
   return {
-    authError: state.auth.authError,
-    auth: state.firebase.auth,
     buttonLogin: state.auth.buttonLogin,
   };
 };

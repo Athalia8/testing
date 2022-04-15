@@ -49,20 +49,22 @@ function NavbarComponent(props) {
         <>
           {photoURL ? (
             <NavItem>
-              <img src={photoURL} alt="Profile" width={40} height={40} />
+              <img src={photoURL} className="rounded-circle" alt="Profile" width={40} height={40} />
             </NavItem>
           ) : (
             <NavItem>
-              <img src="/user.png" alt="Profile" width={40} height={40} />
+              <img src="/user.png" className="rounded-circle" alt="Profile" width={40} height={40} />
             </NavItem>
           )}
           <NavItem>
             <Link href={"/profile/" + [uid]}>
               <a className="nav-link">
                 {displayName}
-                <Badge color="primary" pill>
-                  {scoreRedux2 === -1 ? score : score !== scoreRedux2 && scoreRedux2 >= 0 ? scoreRedux2 : scoreRedux2}
-                </Badge>
+                <span className="score_info">
+                  <Badge color="danger" pill>
+                    {scoreRedux2 === -1 ? score : score !== scoreRedux2 && scoreRedux2 >= 0 ? scoreRedux2 : scoreRedux2}
+                  </Badge>
+                </span>
               </a>
             </Link>
           </NavItem>
@@ -91,8 +93,8 @@ function NavbarComponent(props) {
     }
   };
   return (
-    <div className="px-lg-5 shadow bg-light rounded fixed-top">
-      <Navbar color="light" light expand="md">
+    <div className="px-lg-5 shadow bg_navbar navbar-dark rounded fixed-top">
+      <Navbar expand="md">
         <Link href="/">
           <a className="navbar-brand">Gaming Platform</a>
         </Link>

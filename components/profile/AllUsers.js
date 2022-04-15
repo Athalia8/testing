@@ -28,7 +28,7 @@ function AllUsers() {
     <div>
       <hr />
       <h5 className="text-center">Users Game Rock Paper Scissors Info</h5>
-      <Table>
+      <table style={{ width: "100%" }}>
         <thead>
           <tr>
             <th>Username</th>
@@ -47,7 +47,7 @@ function AllUsers() {
             ))
           }
         </tbody>
-      </Table>
+      </table>
       <br />
       <br />
       <br />
