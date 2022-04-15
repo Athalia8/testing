@@ -1,19 +1,51 @@
 import Link from "next/link";
 import { Button, Row, Col, Badge, Container, Table, Card, CardImg, CardBody, } from "reactstrap";
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import Layout from "../../components/layouts/Layout";
-import { auth } from '../../firebase/config'
+import { auth, db } from '../../firebase/config'
+import { collection, doc, getDoc, getDocs, query } from "firebase/firestore";
+// import Image from 'next/image'
 
 export default function Profile() {
   const [dataUser, setDataUser] = useState([])
+  const [userGame, setUserGame] = useState([])
 
   const data = []
+  const game = []
   const user = auth.currentUser
+
+  async function getGame() {
+    const docRef = doc(db, "users");
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      docSnap.map((doc) => {
+
+        console.log(doc.data())
+      })
+    }
+  }
+
+  async function getUsers() {
+    console.log("jalankan fungsi")
+    try {
+      const array = []
+      const querySnapshot = await getDocs(collection(db, "users"));
+      querySnapshot.forEach((doc) => {
+        array.push(doc.data());
+      });
+      console.log(array);
+
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
+
   useEffect(() => {
     data.push(user)
     setDataUser(data[0])
-    // console.log(data[0].email)
+    // getGame()
+    getUsers()
   }, [])
 
   return (
@@ -52,7 +84,7 @@ export default function Profile() {
                 </tbody>
               </Table>
               <div className="mt-2 text-center">
-                <Link href="/profile/update">
+                <Link href={"/profile/update/" + dataUser.uid}>
                   <Button color="primary">Update Profile</Button>
                 </Link>
               </div>

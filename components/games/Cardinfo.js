@@ -52,18 +52,16 @@ const CardInfo = ({ detailGame2, gameId }) => {
   }
 
   return (
-    <>
+    <div className="mt-2">
       <h3>Detail Game</h3>
       <div
         style={{
           display: "block",
-          width: 400,
-          height: 220,
         }}
       >
         {cardInfo}
       </div>
-    </>
+    </div>
   );
 };
 

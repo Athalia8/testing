@@ -1,28 +1,66 @@
 import React, { useState, useEffect } from "react";
 // import "../../../styles/globals.css";
-import { setDoc, collection, where, query, getDocs, doc, updateDoc } from "firebase/firestore";
+import { addDoc, setDoc, collection, where, query, getDocs, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase/config";
+import { connect, useDispatch } from "react-redux";
+import { nextRound, restart, addScore, resetScore, finish } from "../../../redux/actions/gameActions";
+import swal from "sweetalert";
 
 var player_pick = "";
 var cpu = "";
-var score = 0;
-var round = 1;
+// var score = 0;
+// var round = 1;
 var history_score;
 var history_id;
 
 const GameBody = (props) => {
+  const { round, score } = props;
   const [cpuS, setCpuS] = useState("");
   const [playerS, setPlayerS] = useState("");
   const [cpuR, setCpuR] = useState("");
   const [playerR, setPlayerR] = useState("");
   const [cpuP, setCpuP] = useState("");
   const [playerP, setPlayerP] = useState("");
+  const dispatch = useDispatch();
 
   const uid = props.data.uid;
+  useEffect(() => {
+    if (round <= 3) {
+      setTimeout(() => {
+        swal({
+          title: "Round " + round,
+          text: "Are you ready?",
+          timer: 1500,
+          buttons: false,
+        });
+
+        refresh();
+      }, 1500);
+    } else {
+      addDoc(collection(db, "game_history"), {
+        uid: props.data.uid,
+        game: "Rock Paper Scissors",
+        username: props.data.username,
+        score: score,
+        created_at: new Date(),
+      });
+      getHistory(score);
+      dispatch(finish(score));
+      swal({
+        title: "Game Over",
+        text: "Thank you for playing, Your final score is " + score,
+        buttons: [true, "Play Again"],
+      }).then((isConfirm) => {
+        if (isConfirm) {
+          reset();
+        }
+      });
+    }
+  }, [round]);
 
   useEffect(() => {
-    //console.log(uid);
-  }, []);
+    // console.log(uid);
+  }, [score]);
 
   async function getHistory(currScore) {
     const q = query(
@@ -65,6 +103,7 @@ const GameBody = (props) => {
     let arr = ["batu", "gunting", "kertas"];
     cpu = arr[Math.floor(Math.random() * arr.length)];
     //console.log("CPU memilih " + cpu);
+
     if (player_pick === "batu" && cpu === "batu") {
       setCpuR(toggle);
       //console.log("SERI");
@@ -79,8 +118,8 @@ const GameBody = (props) => {
       document.getElementById(
         "result"
       ).innerHTML = `<h3 style="color:white;vertical-align: -webkit-baseline-middle;"><b>YOU WIN!</b></h3>`;
-      score++;
-      document.getElementById("score").innerHTML = score;
+      dispatch(addScore());
+      //document.getElementById("score").innerHTML = score;
     } else if (player_pick === "batu" && cpu === "kertas") {
       setCpuP(toggle);
       //console.log("Player 2 Menang!");
@@ -95,8 +134,8 @@ const GameBody = (props) => {
       document.getElementById(
         "result"
       ).innerHTML = `<h3 style="color:white;vertical-align: -webkit-baseline-middle;"><b>YOU WIN!</b></h3>`;
-      score++;
-      document.getElementById("score").innerHTML = score;
+      dispatch(addScore());
+      //document.getElementById("score").innerHTML = score;
     } else if (player_pick === "kertas" && cpu === "kertas") {
       setCpuP(toggle);
       //console.log("SERI");
@@ -125,8 +164,8 @@ const GameBody = (props) => {
       document.getElementById(
         "result"
       ).innerHTML = `<h3 style="color:white;vertical-align: -webkit-baseline-middle;"><b>YOU WIN!</b></h3>`;
-      score++;
-      document.getElementById("score").innerHTML = score;
+      dispatch(addScore());
+      //document.getElementById("score").innerHTML = score;
     } else if (player_pick === "gunting" && cpu === "gunting") {
       setCpuS(toggle);
       //console.log("SERI");
@@ -137,27 +176,13 @@ const GameBody = (props) => {
     } else {
       return 0;
     }
-
+    dispatch(nextRound());
     if (round < 3) {
       setTimeout(() => {
         refresh();
       }, 1500);
-      round++;
     } else {
-      round = 1;
-
-      // addDoc(collection(db, "game_history"), {
-      //   uid: props.data.uid,
-      //   game: "Rock Paper Scissors",
-      //   username: props.data.username,
-      //   score: score,
-      //   created_at: new Date(),
-      // });
-
-      getHistory(score);
-
       document.getElementById("button-refresh").style.display = "";
-      score = 0;
     }
   };
 
@@ -172,9 +197,15 @@ const GameBody = (props) => {
     document.getElementById("result").classList.remove("banner");
     document.getElementById("result").innerHTML = '<h1 style="color:red"><b>VS</b></h1>';
     document.getElementById("button-refresh").style.display = "none";
-    document.getElementById("score").innerHTML = score;
+    //document.getElementById("score").innerHTML = score;
     player_pick = "";
     cpu = "";
+  };
+
+  const reset = () => {
+    refresh();
+    dispatch(resetScore());
+    dispatch(restart());
   };
 
   const getValP = (e) => {
@@ -196,7 +227,9 @@ const GameBody = (props) => {
           </h3>
         </div>
         <div className="col-4 p-3" style={{ textAlign: "center" }}>
-          <h1 id="score">0</h1>
+          <h3>
+            Point : <span id="score">{score}</span>
+          </h3>
         </div>
         <div className="col-4 p-3 test">
           <h3>
@@ -212,6 +245,7 @@ const GameBody = (props) => {
               src="/assets/batu.png"
               alt="Batu"
               style={{ width: "50px", height: "75px" }}
+              //onClick={props.nextRound}
               onClick={() => {
                 if (playerP !== "active" && playerS !== "active") {
                   setPlayerR(toggle);
@@ -293,7 +327,7 @@ const GameBody = (props) => {
             alt="refresh"
             id="button-refresh"
             style={{ width: "50px", display: "none" }}
-            onClick={refresh}
+            onClick={reset}
           />
         </div>
         <div className="col-4 p-3 test">
@@ -312,4 +346,24 @@ const GameBody = (props) => {
     </div>
   );
 };
-export default GameBody;
+
+const mapStateToProps = (state) => {
+  return {
+    // authError: state.auth.authError,
+    // auth: state.firebase.auth,
+    round: state.game.round,
+    score: state.game.score,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    nextRound: () => dispatch(nextRound()),
+    addScore: () => dispatch(addScore()),
+    resetScore: () => dispatch(resetScore()),
+    restart: () => dispatch(restart()),
+    finish: (score) => dispatch(finish(score)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameBody);
