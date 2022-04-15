@@ -17,7 +17,7 @@ export async function getServerSideProps(context) {
   const docRef = doc(db, "games", gid);
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
-    detailGame = docSnap.data();
+    console.log("Document data:", docSnap.data());
   }
 
   //Card Info
