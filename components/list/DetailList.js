@@ -15,8 +15,10 @@ const DetailList = () => {
             remuneration, and from art, which is more often an expression of
             aesthetic or ideological elements.
           </div>
+          <br />
+          <br />
+          <br />
         </div>
-        <div className="col-3 text-dark"></div>
       </div>
     </Container>
   );
