@@ -3,7 +3,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { getDoc, doc } from "firebase/firestore";
 import Router from "next/router";
 import swal from "sweetalert";
-
+ 
 export const signIn = (credentials) => {
   var score = 0;
   const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
