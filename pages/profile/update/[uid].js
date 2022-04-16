@@ -34,6 +34,7 @@ function ProfileUpdate(props) {
               <UpdateName />
               <UpdateEmailComponent />
               <UpdatePasswordComponent />
+              <div className="text-center"><h6>Silakhakn "Refresh" dan login kembali untuk memulihkan data</h6></div>
               <div className="pt-3 text-center">
                 <Button color="success" onClick={refresh} className="">
                   Refresh

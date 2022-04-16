@@ -2,6 +2,7 @@ import { Button, Form, FormGroup, Label, Input, Spinner } from 'reactstrap';
 import { useEffect, useState } from "react";
 import { auth } from "../../../firebase/config";
 import { updatePassword } from "firebase/auth";
+import swal from 'sweetalert';
 
 
 export default function UpdatePasswordComponent() {
@@ -32,19 +33,23 @@ export default function UpdatePasswordComponent() {
   }
 
   const setPassword = () => {
-    setButton(<Spinner color="light" size="sm">Loading...</Spinner>)
+    if (person.password) {
+      setButton(<Spinner color="light" size="sm">Loading...</Spinner>)
 
-    const user = auth.currentUser
-    updatePassword(user, person.password)
-      .then(() => {
-        setButton(<i class='fas fa-check'></i>)
-        setIsEdit("done")
-        // console.log("Update password berhasil")
-      })
-      .catch((err) => {
-        setButton(<i class="fas fa-ban"></i>)
-        console.log("Update password gagal" + err.message)
-      })
+      const user = auth.currentUser
+      updatePassword(user, person.password)
+        .then(() => {
+          setButton(<i class='fas fa-check'></i>)
+          setIsEdit("done")
+          swal({ icon: "succes", text: "Berhasil update password" })
+          // console.log("Update password berhasil")
+        })
+        .catch((err) => {
+          setButton(<i class="fas fa-ban"></i>)
+          swal({ icon: "error", text: "Update password gagal" + err.message })
+          // console.log("Update password gagal" + err.message)
+        })
+    }
   }
 
   return (

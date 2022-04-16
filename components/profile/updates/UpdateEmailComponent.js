@@ -32,20 +32,24 @@ export default function UpdateEmailComponent() {
   }
 
   const setEmail = () => {
-    setButton(<Spinner color="light" size="sm">Loading...</Spinner>)
+    if (person.email) {
+      setButton(<Spinner color="light" size="sm">Loading...</Spinner>)
 
-    const user = auth.currentUser
-    updateEmail(user, person.email)
-      .then(() => {
-        setButton(<i class='fas fa-check'></i>)
-        setIsEdit("done")
-        // console.log("Update email berhasil")
-      })
-      .catch((err) => {
-        setButton(<i class="fas fa-ban"></i>)
-        setIsEdit("done")
-        console.log("Update email gagal" + err.message)
-      })
+      const user = auth.currentUser
+      updateEmail(user, person.email)
+        .then(() => {
+          setButton(<i class='fas fa-check'></i>)
+          setIsEdit("done")
+          swal({ icon: "succes", text: "Berhasil update email" })
+          // console.log("Update email berhasil")
+        })
+        .catch((err) => {
+          setButton(<i class="fas fa-ban"></i>)
+          setIsEdit("done")
+          swal({ icon: "error", text: "Update email gagal" + err.message })
+          // console.log("Update email gagal" + err.message)
+        })
+    }
   }
 
   return (

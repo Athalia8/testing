@@ -2,6 +2,7 @@ import { Button, Form, FormGroup, Label, Input, Spinner } from 'reactstrap';
 import { useEffect, useState } from "react";
 import { auth } from "../../../firebase/config";
 import { updateProfile } from "firebase/auth";
+import swal from 'sweetalert';
 
 export default function UpdateName() {
   const [isEdit, setIsEdit] = useState("close")
@@ -33,22 +34,26 @@ export default function UpdateName() {
 
 
   const setUsername = () => {
-    setButton(<Spinner color="light" size="sm">Loading...</Spinner>)
-    const user = auth.currentUser
-    updateProfile(user,
-      {
-        displayName: person.displayName,
-      })
-      .then(() => {
-        setButton(<i class='fas fa-check'></i>)
-        setIsEdit("done")
-        // console.log("Update username berhasil")
-      })
-      .catch((err) => {
-        setButton(<i class="fas fa-ban"></i>)
-        setIsEdit("done")
-        // console.log("Update username gagal")
-      })
+    if (person.displayName) {
+      setButton(<Spinner color="light" size="sm">Loading...</Spinner>)
+      const user = auth.currentUser
+      updateProfile(user,
+        {
+          displayName: person.displayName,
+        })
+        .then(() => {
+          setButton(<i class='fas fa-check'></i>)
+          setIsEdit("done")
+          swal({ icon: "succes", text: "Berhasil update username" })
+          // console.log("Update username berhasil")
+        })
+        .catch((err) => {
+          setButton(<i class="fas fa-ban"></i>)
+          setIsEdit("done")
+          swal({ icon: "error", text: "Update username gagal" })
+          // console.log("Update username gagal")
+        })
+    }
   }
 
   return (
@@ -59,7 +64,7 @@ export default function UpdateName() {
             <FormGroup> {/* close */}
               <Label>Username :</Label>
               <div className="d-flex">
-                <Input type="text" name="text" value={person.displayName} disabled ="disabled"/>
+                <Input type="text" name="text" value={person.displayName} disabled="disabled" />
                 <div className="mx-2"><Button color="primary" onClick={edit}>Edit</Button></div>
               </div>
             </FormGroup>
@@ -76,7 +81,7 @@ export default function UpdateName() {
             <FormGroup> {/* done */}
               <Label>Username :</Label>
               <div className="d-flex">
-                <Input type="text" name="text" placeholder={person.displayName} disabled ="disabled"/>
+                <Input type="text" name="text" placeholder={person.displayName} disabled="disabled" />
                 <div className="mx-2"><Button color="primary" disabled>{button}</Button></div>
               </div>
             </FormGroup>
