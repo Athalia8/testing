@@ -17,12 +17,12 @@ import styles from "../../styles/Home.module.css";
 
 const Content = () => {
   const [orders, setOrders] = useState([]);
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(true); //false
 
-  const checkUser = () => {
-    const token = localStorage.getItem("token");
-    token ? setUser(true) : setUser(false);
-  };
+  // const checkUser = () => {
+  //   const token = localStorage.getItem("token");
+  //   token ? setUser(true) : setUser(false);
+  // };
 
   useEffect(() => {
     async function fetchData() {
@@ -38,12 +38,12 @@ const Content = () => {
         //console.log(e);
       }
     }
-    checkUser();
+    // checkUser();
     fetchData();
   }, []);
 
   return (
-    <Container className="pt-5">
+    <Container className={styles.listCon}>
       <CardGroup className={styles.listBgColor}>
         <div className={styles.listRow}>
           <div xs="12" sm="6" md="6" className={styles.listCol}>
@@ -71,7 +71,7 @@ const Content = () => {
                     {order.release_date}
                   </CardText>
                   {user ? (
-                    <Link href={"/detailgame/" + order.id}>
+                    <Link href={order.id}>
                       <Button color="warning" className={styles.listDate}>
                         Game Detail
                       </Button>

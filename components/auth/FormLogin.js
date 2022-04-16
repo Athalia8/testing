@@ -1,37 +1,89 @@
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Button, Form, FormGroup, Input, Alert } from "reactstrap";
+import { signIn } from "../../redux/actions/authActions";
+import { connect, useDispatch } from "react-redux";
 
-export default function FormLogin() {
+function FormLogin(props) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [alertLogin, setAlertLogin] = useState("");
+  // const [button, setButton] = useState("Login");
+  const { buttonLogin, authError } = props;
+
+  useEffect(() => {
+    // setButton(buttonLogin);
+    setAlertLogin(authError);
+  }, [buttonLogin, authError]);
+
+  const changeEmail = (e) => {
+    const value = e.target.value;
+    setEmail(value);
+    setAlertLogin("");
+  };
+
+  const changePassword = (e) => {
+    const value = e.target.value;
+    setPassword(value);
+    setAlertLogin("");
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await props.signIn({ email, password });
+  };
+
   return (
-    <div>
-      <div className="card-form">
-        <p className="text-center text-muted fs-08 mt-3">Or sign in with credentials</p>
-        <div className="d-flex align-items-center mb-2">
-          <span className="far fa-envelope text-muted mx-1" />
-          <input
-            type="email"
-            placeholder="Email"
-            className="form-control"
-            required
-          />
-        </div>
-        <div className="d-flex align-items-center mb-2">
-          <span className="fas fa-key text-muted mx-1" />
-          <input
-            type="password"
-            placeholder="Password"
-            className="form-control"
-            required
-          />
-        </div>
-        <div className="d-flex justify-content-center">
-          <button className="btn btn-primary mt-3">Login</button>
-        </div>
-        <div class="text-center fs-6">
-          <Link href="#"><a>Forget password? </a></Link>
-          or
-          <Link href="/register"><a> Register</a></Link>
-        </div>
+    <Form>
+      <div className="py-0">
+        {
+          alertLogin ? (<Alert color="danger" className="text-center py-1 px-0">
+            <span className="fas fa-exclamation-triangle mx-1" />
+            {alertLogin}</Alert>)
+            :
+            (<Alert color="light" className="text-center py-1">or</Alert>)
+        }
       </div>
-    </div>
-  )
+      <div className="text-center pb-3">Sign in with credentials</div>
+      <FormGroup className="d-flex align-items-center">
+        <span className="far fa-envelope text-muted mx-1" />
+        <Input
+          type="email"
+          placeholder="Email"
+          pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
+          value={email}
+          onChange={changeEmail}
+          required
+        />
+      </FormGroup>
+      <FormGroup className="d-flex align-items-center">
+        <span className="fas fa-key text-muted mx-1" />
+        <Input type="password" placeholder="Password" value={password} onChange={changePassword} required />
+      </FormGroup>
+      <div className="text-center mb-3">
+        <Button onClick={handleSubmit} color="primary">{buttonLogin}</Button>
+      </div>
+      <div className="text-center mt-3">
+        <Link href="/auth/forgot"><a className="text-decoration-none text-primary">Forget password? </a></Link>
+        or
+        <Link href="/auth/register"><a className="text-decoration-none text-primary"> Register</a></Link>
+      </div>
+    </Form>
+  );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    authError: state.auth.authError,
+    auth: state.firebase.auth,
+    buttonLogin: state.auth.buttonLogin,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signIn: (creds) => dispatch(signIn(creds)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormLogin);
