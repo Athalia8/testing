@@ -5,9 +5,10 @@ import Layout from "../../components/layouts/Layout";
 export default function List() {
   return (
     <div>
-      <Layout title="Game List"></Layout>
-      <Content></Content>
-      <DetailList></DetailList>
+      <Layout title="Game List">
+        <Content></Content>
+        <DetailList></DetailList>
+      </Layout>
     </div>
   );
 }
