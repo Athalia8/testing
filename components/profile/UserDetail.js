@@ -52,14 +52,14 @@ function UserDetail(props) {
 
         </div>
       </div>
-      <table style={{ width: "100%" }}>
+      <Table borderless responsive size="sm" className="text-light">
         <tbody>
           <tr>
             <th scope="row">Email</th>
             <td>: {dataUser.email}</td>
           </tr>
         </tbody>
-      </table>
+      </Table>
       <div className="mt-2 text-center">
         <Link href={"/profile/update/" + dataUser.uid}>
           <Button color="primary">Update Profile</Button>

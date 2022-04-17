@@ -18,7 +18,8 @@ const Updates = ({ detail }) => {
                 padding: 10px;
                 flex-direction: column;
                 justify-content: center;
-                background: #EEEEEE;
+                // background: #EEEEEE;
+                padding-bottom: 200px;
               }
               a {
                 text-decoration: none;

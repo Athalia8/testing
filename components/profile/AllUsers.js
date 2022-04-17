@@ -28,7 +28,7 @@ function AllUsers() {
     <div>
       <hr />
       <h5 className="text-center">Users Game Rock Paper Scissors Info</h5>
-      <table style={{ width: "100%" }}>
+      <Table borderless hover responsive size="sm" className="text-light">
         <thead>
           <tr>
             <th>Username</th>
@@ -47,7 +47,7 @@ function AllUsers() {
             ))
           }
         </tbody>
-      </table>
+      </Table>
       <br />
       <br />
       <br />

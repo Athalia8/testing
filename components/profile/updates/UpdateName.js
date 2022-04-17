@@ -32,6 +32,10 @@ export default function UpdateName() {
     setIsEdit("close")
   }
 
+  // const data = doc(db, "users", person.uid);
+  // await updateDoc(data, {
+  //   username: level,
+  // });
 
   const setUsername = () => {
     if (person.displayName) {

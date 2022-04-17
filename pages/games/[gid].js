@@ -61,7 +61,7 @@ export default function GameDetail({ detailGame, detailGame2, detailGame3, detai
               <ImgDetail detailGame={detailGame} gameId={gameId} />
             </Col>
             <Col sm={4}>
-              <CardUser detailGame3={detailGame3} detailGame4={detailGame4} />
+              <CardUser gameId={gameId} detailGame={detailGame2} />
               <Card detailGame2={detailGame2} gameId={gameId} />
             </Col>
           </Row>

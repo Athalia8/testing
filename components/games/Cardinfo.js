@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, CardBody, CardTitle, CardText, Button } from "reactstrap";
+import { Card, CardBody, CardTitle, CardText, Button, Table } from "reactstrap";
 import swal from "sweetalert";
 import { useRouter } from "next/router";
 const CardInfo = ({ detailGame2, gameId }) => {
@@ -15,23 +15,29 @@ const CardInfo = ({ detailGame2, gameId }) => {
   if (data.length) {
     cardInfo = data.map((d) => {
       return (
-        <Card>
+        <Card className="bg-transparent border-light">
           <CardBody>
             <CardTitle tag="h5">
               <b>{d.name}</b>
               <br></br>
             </CardTitle>
             <div className="scrollspy-example" data-bs-spy="scroll">
-              <b>Developer : {d.developer}</b>
-              <br></br>
-
-              <b>Genre : {d.genre}</b>
-              <br></br>
-
-              <b>Release Date : {d.release_date}</b>
-              <br></br>
-              <br></br>
-
+              <Table borderless responsive size="sm" className="text-light">
+                <tbody>
+                  <tr>
+                    <th>Developer</th>
+                    <th>: {d.developer}</th>
+                  </tr>
+                  <tr>
+                    <th>Genre</th>
+                    <th>: {d.genre}</th>
+                  </tr>
+                  <tr>
+                    <th>Release Date</th>
+                    <th>: {d.release_date}</th>
+                  </tr>
+                </tbody>
+              </Table>
               <Button
                 color="primary"
                 onClick={() => {

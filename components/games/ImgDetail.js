@@ -8,7 +8,7 @@ const ImgDetail = ({ detailGame }) => {
   }, [detailGame]);
 
   return (
-    <div>
+    <div className=" d-flex justify-content-center" >
       <img className="img-fluid mt-4" src={data.thumbnail} alt={data.name} />
     </div>
   );

@@ -8,11 +8,16 @@ import { signOut } from "../../../redux/actions/authActions";
 import { connect } from "react-redux";
 import { auth } from "../../../firebase/config";
 import Router from "next/router";
+import { useEffect } from "react";
 
 function ProfileUpdate(props) {
 
-  // useEffect(() => {
-  // }, [])
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      Router.push("/login");
+    }
+  }, [])
 
   const refresh = () => {
     signOut(auth);
