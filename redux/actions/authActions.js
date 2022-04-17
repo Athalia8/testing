@@ -172,7 +172,7 @@ export const signInGoogle = (credentials) => {
       localStorage.setItem('token', user.accessToken);
       const q = query(collection(db, "users"), where("uid", "==", user.uid));
       const docs = await getDocs(q);
-      console.log(docs.docs)
+      // console.log(docs.docs)
       if (docs.docs.length === 0) {
         // create doc user
         await setDoc(doc(db, "users", user.uid), {
@@ -198,7 +198,7 @@ export const signInGoogle = (credentials) => {
       swal({ icon: "success", text: "Anda masuk dengan akun Google" });
       Router.push("/home");
     } catch (error) {
-      console.log(error.message)
+      // console.log(error.message)
       dispatch({
         type: LOGIN_GOOGLE,
         payload: {
@@ -259,7 +259,7 @@ export const signInFacebook = (credentials) => {
       swal({ icon: "success", text: "Anda masuk dengan akun Facebook" });
       Router.push("/home");
     } catch (error) {
-      console.log(error.message)
+      // console.log(error.message)
       dispatch({
         type: LOGIN_FACEBOOK,
         payload: {
