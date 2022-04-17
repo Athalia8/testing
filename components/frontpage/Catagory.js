@@ -12,7 +12,7 @@ export default function Catagory() {
   //   return <gamesdItem key={item.id} gamesd={item} />
   // });
 
-  console.log(gamess);
+  // console.log(gamess);
   useEffect(
     () =>
       onSnapshot(collection(db, "games"), (snapshot) =>

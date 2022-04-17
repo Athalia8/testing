@@ -43,7 +43,7 @@ export default function UpdatePasswordComponent() {
       })
       .catch((err) => {
         setButton(<i class="fas fa-ban"></i>)
-        console.log("Update password gagal" + err.message)
+        // console.log("Update password gagal" + err.message)
       })
   }
 

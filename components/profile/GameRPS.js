@@ -17,7 +17,7 @@ export default function GameRPS() {
       });
       setRPS(array);
     } catch (error) {
-      console.log(error.code)
+      // console.log(error.code)
     }
   }
 
