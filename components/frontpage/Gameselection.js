@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, } from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Button } from 'reactstrap';
+import Link from "next/link";
 
 export default function Gameselection() {
   const [isOpen, setIsOpen] = useState(false)
@@ -12,21 +13,21 @@ export default function Gameselection() {
       <hr />
       <h3 className='text-center'>Choose your Game Gender</h3>
       <div className="justify-content-center d-flex">
-        <Navbar color="outline" light expand="md">
+        <Navbar color="purple" light expand="md">
           <NavbarToggler onClick={changeToggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mx-auto" navbar>
               <NavItem>
-                <NavLink className="mx-5 px-3 btn btn-outline-secondary" href="#">Fantasy</NavLink>
+                <NavLink className="mx-5 px-3 btn btn-outline-light" href="#">Fantasy</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className="mx-5 px-3 btn btn-outline-secondary" href="#">Action</NavLink>
+                <NavLink className="mx-5 px-3 btn btn-outline-light" href="#">Action</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className="mx-5 px-3 btn btn-outline-secondary" href="#">RGP</NavLink>
+                <NavLink className="mx-5 px-3 btn btn-outline-light" href="#">RGP</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className="mx-5 px-3 btn btn-outline-secondary" href="#">Thriller</NavLink>
+                <NavLink className="mx-5 px-3 btn btn-outline-light" href="#">Thriller</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
@@ -38,7 +39,11 @@ export default function Gameselection() {
         <img className="mx-2 my-2" src="https://i.pinimg.com/564x/09/8e/6b/098e6bbe79d3bac42fdda10d7f18c275.jpg" width={250} height={200} alt='Thriller' />
       </div>
       <div className='text-center my-3'>
-        <button type="button" className="btn btn-outline-dark btn-sm">View All</button>
+      <Link href={"/games/list"}>
+      <Button  color="light" outline>
+          Game Detail
+      </Button>
+      </Link>
       </div>
     </div>
   )
