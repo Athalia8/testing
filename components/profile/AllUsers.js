@@ -17,7 +17,7 @@ function AllUsers() {
       });
       setUsers(array);
     } catch (error) {
-      console.log(error.code)
+      // console.log(error.code)
     }
   }
   useEffect(() => {

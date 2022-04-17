@@ -79,7 +79,7 @@ export default function UpadatePhoto() {
             setPhotoURL(url)
           })
           .catch((error) => {
-            console.log(error.message)
+            // console.log(error.message)
           });
       }
     );
@@ -87,70 +87,70 @@ export default function UpadatePhoto() {
 
   const setPhoto = (e) => {
     e.preventDefault()
-    if(file){
-    setButton(<Spinner color="light" size="sm">Loading...</Spinner>)
-    setButton2(<Spinner color="light" size="sm">Loading...</Spinner>)
-    const user = auth.currentUser
-    updateProfile(user,
-      {
-        photoURL: photoURL,
-      })
-      .then(() => {
-        setButton(<i class='fas fa-check'></i>)
-        setButton2(<i class='fas fa-check'></i>)
-        setIsEdit("done")
-        // console.log("Update photo berhasil")
-      })
-      .catch((err) => {
-        setButton(<i class="fas fa-ban"></i>)
-        setButton2(<i class="fas fa-ban"></i>)
-        setIsEdit("done")
-        // console.log("Update photo gagal")
-      })
+    if (file) {
+      setButton(<Spinner color="light" size="sm">Loading...</Spinner>)
+      setButton2(<Spinner color="light" size="sm">Loading...</Spinner>)
+      const user = auth.currentUser
+      updateProfile(user,
+        {
+          photoURL: photoURL,
+        })
+        .then(() => {
+          setButton(<i class='fas fa-check'></i>)
+          setButton2(<i class='fas fa-check'></i>)
+          setIsEdit("done")
+          // console.log("Update photo berhasil")
+        })
+        .catch((err) => {
+          setButton(<i class="fas fa-ban"></i>)
+          setButton2(<i class="fas fa-ban"></i>)
+          setIsEdit("done")
+          // console.log("Update photo gagal")
+        })
     }
-}
+  }
 
   return (
     <div>
       {
         preview ? (
           <img src={preview} alt="Profile" width={200} height={200} />
-          ) : person.photoURL === null ? (
+        ) : person.photoURL === null ? (
           <img src="/user.png" alt="Profile" width={200} height={200} />
-          ) : person.photoURL ? (
-            <img src={person.photoURL} alt="Profile" width={200} height={200} />
-          ): ""
+        ) : person.photoURL ? (
+          <img src={person.photoURL} alt="Profile" width={200} height={200} />
+        ) : ""
       }
       <Form>
         {
           !file && isEdit === "close" ? (
             <FormGroup>
-          <div className="d-flex mt-3">
-          <Label>Foto Profile :</Label>
-          <div className="mx-2"><Button color="primary" onClick={edit}>Edit</Button></div>
-          </div>
-        </FormGroup>
+              <div className="d-flex mt-3">
+                <Label>Foto Profile :</Label>
+                <div className="mx-2"><Button color="primary" onClick={edit}>Edit</Button></div>
+              </div>
+            </FormGroup>
           ) : ""
         }
         {
           isEdit === "edit" ? (
             <FormGroup>
-            {progress ? <Progress value={progress}>{progress}%</Progress> : ""}
-          <div className="d-flex mt-3">
-          <Input type="file" name="file" onChange={changePhoto} />
-          <div className="ml-2 py-2 align-item-center justify-item-center"><Button close onClick={close} /></div>
-          <Button color="primary" onClick={uploadPhoto}>{button}</Button>
-          </div>
-        </FormGroup>
+              {progress ? <Progress value={progress}>{progress}%</Progress> : ""}
+              <div className="d-flex mt-3">
+                <Input type="file" name="file" onChange={changePhoto} />
+                <div className="ml-2 py-2 align-item-center justify-item-center"><Button close onClick={close} /></div>
+                <Button color="primary" onClick={uploadPhoto}>{button}</Button>
+              </div>
+            </FormGroup>
           ) : isEdit === "done" ? (
-             <div className="mt-3 text-center">
-        </div>
+            <div className="mt-3 text-center">
+            </div>
           ) : ""
         }
         {
           status ? <Button color="primary" onClick={setPhoto}>{button2}</Button> : ""
         }
-        
+
       </Form>
     </div>
   );

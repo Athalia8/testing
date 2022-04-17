@@ -85,6 +85,9 @@ function Home({ idss, itemss, leaderboards, leaderboards_id, updates, updates_id
           </Col>
         </Row>
       </Container>
+      <br />
+      <br />
+      <br />
     </Layout>
   );
 }

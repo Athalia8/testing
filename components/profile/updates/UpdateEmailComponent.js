@@ -44,7 +44,7 @@ export default function UpdateEmailComponent() {
       .catch((err) => {
         setButton(<i class="fas fa-ban"></i>)
         setIsEdit("done")
-        console.log("Update email gagal" + err.message)
+        // console.log("Update email gagal" + err.message)
       })
   }
 
