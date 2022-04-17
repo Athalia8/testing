@@ -1,11 +1,7 @@
 import { Button, Form, FormGroup, Input, Alert } from 'reactstrap';
-// import { useRouter } from 'next/router'
-// import { auth, db } from "../../firebase/config";
-// import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-// import { setDoc, doc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { signUp } from "../../redux/actions/registActions";
+import { signUp } from "../../redux/actions/authActions";
 import { connect, useDispatch } from "react-redux";
 
 function FormRegister(props) {
@@ -13,14 +9,8 @@ function FormRegister(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState("");
-  const [button, setButton] = useState("Register");
-  // const router = useRouter()
-  const { registError, buttonRegister } = props;
-
-  useEffect(() => {
-    setAlert(registError)
-    setButton(buttonRegister)
-  }, [registError, buttonRegister])
+  const { buttonRegister } = props;
+  const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
   const changeUsername = (e) => {
     const value = e.target.value;
@@ -42,50 +32,15 @@ function FormRegister(props) {
 
   const register = async (e) => {
     e.preventDefault();
-    await props.signUp({ username, email, password });
-    // if ((username.length, email.length, password.length) <= 0) {
-    //   setAlert("form tidak boleh kosong !!");
-    // }
-    // // else if (email.length <= 0) {
-    // //   setAlert("email tidak boleh kosong !!");
-    // // }
-    // // else if (password.length <= 0) {
-    // //   setAlert("password tidak boleh kosong !!");
-    // // }
-    // else if (password.length < 6) {
-    //   setAlert("Password minimal 6 karakter !!");
-    // }
-    // else {
-    //   try {
-    //     setButton("Proccess...")
-    //     const res = await createUserWithEmailAndPassword(auth, email, password);
-    //     const user = res.user;
-    //     await updateProfile(auth.currentUser, {
-    //       displayName: username,
-    //       photoURL: "https://i.ibb.co/H4f3Hkv/profile.png"
-    //     }).then(() => {
-    //       // Profile updated!
-    //       // ...
-    //       console.log("Profile updated")
-    //     }).catch((error) => {
-    //       // An error occurred
-    //       // ...
-    //       console.log(error, message)
-    //     });
-    //     const docRef = doc(db, "users", user.uid);
-    //     await setDoc(docRef, {
-    //       username: username,
-    //       level: "Easy",
-    //       authProvider: "local",
-    //       updatedAt: new Date(),
-    //     });
-    //     // localStorage.setItem("token", user.accessToken);
-    //     setAlert("Registrasi berhasil, silahkan Login");
-    //     router.push("/login")
-    //   } catch (err) {
-    //     setAlert(err.message);
-    //   }
-    // }
+    if ((username.length, email.length, password.length) <= 0) {
+      setAlert("Form tidak boleh kosong !!");
+    } else if (!email.match(validRegex)) {
+      setAlert("Masukkan alamat email yang valid !!");
+    } else if (password.length <= 5) {
+      setAlert("Password minimal 6 karakter !!");
+    } else {
+      await props.signUp({ username, email, password });
+    }
   };
 
   return (
@@ -128,7 +83,7 @@ function FormRegister(props) {
         />
       </FormGroup>
       <div className="text-center">
-        <Button onClick={register} color="primary">{button}</Button>
+        <Button onClick={register} color="primary">{buttonRegister}</Button>
       </div>
       <div className="text-center mt-3">Have account? <Link href="/auth/login"><a className="text-decoration-none text-primary">Login</a></Link></div>
     </Form>
@@ -137,8 +92,7 @@ function FormRegister(props) {
 
 const mapStateToProps = (state) => {
   return {
-    registError: state.regist.registError,
-    buttonRegister: state.regist.buttonRegister,
+    buttonRegister: state.auth.buttonRegister,
   };
 };
 

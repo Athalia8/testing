@@ -38,9 +38,9 @@ function UserDetail(props) {
       <div className="mt-4 text-center">
         {
           dataUser.photoURL ? (
-            <img src={dataUser.photoURL} alt="Profile" width={250} height={250} />
+            <img src={dataUser.photoURL} className="rounded-circle" alt="Profile" width={250} height={250} />
           ) : (
-            <img src="/user.png" alt="Profile" width={250} height={250} />
+            <img src="/user.png" className="rounded-circle" alt="Profile" width={250} height={250} />
           )
         }
         <div className="justify-item-center">
@@ -52,7 +52,7 @@ function UserDetail(props) {
 
         </div>
       </div>
-      <Table size="sm">
+      <Table borderless responsive size="sm" className="text-light">
         <tbody>
           <tr>
             <th scope="row">Email</th>

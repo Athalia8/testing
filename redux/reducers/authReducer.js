@@ -1,63 +1,40 @@
+import { LOGIN_EMAIL_PASSWORD, REGISTRASI_EMAIL_PASSWORD, LOGIN_GOOGLE, LOGIN_FACEBOOK, LOGOUT } from '../actions/authActions'
+
 if (typeof window !== "undefined") {
   var scoreRedux = JSON.parse(localStorage.getItem("score"));
 } else {
   var scoreRedux = -1;
 }
 const initState = {
-  authError: "",
+  buttonRegister: "Register",
   buttonLogin: "Login",
+  buttonGoogle: "Google",
+  buttonFacebook: "Facebook",
   scoreRedux: scoreRedux || "0",
 };
 
 const authReducer = (state = initState, action) => {
   switch (action.type) {
-    case "EMPTY_FORM":
+    case LOGIN_EMAIL_PASSWORD:
       return {
         ...state,
-        authError: "Form tidak boleh kosong !!",
-        buttonLogin: "Login",
+        buttonLogin: action.payload.button,
+        scoreRedux: action.payload.score,
       };
-    case "INVALID_EMAIL":
+    case REGISTRASI_EMAIL_PASSWORD:
       return {
         ...state,
-        authError: "Masukkan alamat email yang valid !!",
-        buttonLogin: "Login",
+        buttonRegister: action.payload.button,
       };
-    case "LESS_PASSWORD":
+    case LOGIN_GOOGLE:
       return {
         ...state,
-        authError: "Password minimal 6 karakter !!",
-        buttonLogin: "Login",
+        buttonGoogle: action.payload.button,
       };
-    case "LOGIN_PROCESS":
+    case LOGIN_FACEBOOK:
       return {
         ...state,
-        authError: "",
-        buttonLogin: "Process..",
-      };
-    case "AUTH_ERROR":
-      return {
-        ...state,
-        authError: "",
-        buttonLogin: "Login",
-      };
-    case "LOGIN_SUCCESS":
-      if (scoreRedux === -1) {
-        scoreRedux = action.score;
-      }
-      return {
-        ...state,
-        token: action.token,
-        authError: "",
-        buttonLogin: "Welcome",
-        // scoreRedux: score,
-      };
-    case "LOGOUT_SUCCESS":
-      return {
-        ...state,
-        token: action.token,
-        authError: "",
-        buttonLogin: "Login",
+        buttonFacebook: action.payload.button,
       };
     default:
       return state;

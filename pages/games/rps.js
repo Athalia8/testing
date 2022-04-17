@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import GameBody from "../../components/games/rps/Body";
-// import NavbarComponent from "../components/include/Navbar";
-// import Footer from "../components/include/Footer";
 import Layout from "../../components/layouts/Layout";
+import Router from 'next/router'
 
 const RPS = () => {
   const [displayName, setDisplayName] = useState("");
@@ -14,7 +13,7 @@ const RPS = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!token) {
       //console.log("tes");
-      Router.push("/auth/login");
+      Router.push("/login");
     } else {
       setEmail(user.email);
       setDisplayName(user.displayName);

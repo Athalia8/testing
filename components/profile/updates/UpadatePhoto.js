@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { auth } from "../../../firebase/config";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
+import swal from 'sweetalert';
 
 export default function UpadatePhoto() {
   const [isEdit, setIsEdit] = useState("close")
@@ -39,56 +40,62 @@ export default function UpadatePhoto() {
   }
 
   const uploadPhoto = () => {
-    const storage = getStorage();
-    const metadata = {
-      contentType: 'image/jpeg',
-    };
-    const storageRef = ref(storage, 'images/users/' + file.name);
-    const uploadTask = uploadBytesResumable(storageRef, file, metadata);
+    if (file) {
+      setButton(<Spinner color="light" size="sm">Loading...</Spinner>)
+      const storage = getStorage();
+      const metadata = {
+        contentType: 'image/jpeg',
+      };
+      const storageRef = ref(storage, 'images/users/' + file.name);
+      const uploadTask = uploadBytesResumable(storageRef, file, metadata);
 
-    uploadTask.on('state_changed',
-      (snapshot) => {
-        const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes)) * 100;
-        setProgress(progress)
-        switch (snapshot.state) {
-          case 'paused':
-            setStatus('Upload is paused');
-            break;
-          case 'running':
-            setStatus('Upload is running');
-            break;
+      uploadTask.on('state_changed',
+        (snapshot) => {
+          const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes)) * 100;
+          setProgress(progress)
+          switch (snapshot.state) {
+            case 'paused':
+              setStatus('Upload is paused');
+              break;
+            case 'running':
+              setStatus('Upload is running');
+              break;
+          }
+        },
+        (error) => {
+          switch (error.code) {
+            case 'storage/unauthorized':
+              setStatus('storage/unauthorized')
+              break;
+            case 'storage/canceled':
+              setStatus('storage/canceled')
+              break;
+            case 'storage/unknown':
+              setStatus('storage/unknown')
+              break;
+          }
+        },
+        () => {
+          getDownloadURL(ref(storage, 'images/users/' + file.name))
+            .then((url) => {
+              setStatus('Upload Success');
+              setPhotoURL(url)
+              setButton(<i class='fas fa-check'></i>)
+              setIsEdit("done")
+            })
+            .catch((error) => {
+              console.log(error.message)
+            });
         }
-      },
-      (error) => {
-        switch (error.code) {
-          case 'storage/unauthorized':
-            setStatus('storage/unauthorized')
-            break;
-          case 'storage/canceled':
-            setStatus('storage/canceled')
-            break;
-          case 'storage/unknown':
-            setStatus('storage/unknown')
-            break;
-        }
-      },
-      () => {
-        getDownloadURL(ref(storage, 'images/users/' + file.name))
-          .then((url) => {
-            setStatus('Upload Success');
-            setPhotoURL(url)
-          })
-          .catch((error) => {
-            // console.log(error.message)
-          });
-      }
-    );
+      );
+    } else {
+      swal({ icon: "error", text: "Pilih photo dulu" })
+    }
   }
 
   const setPhoto = (e) => {
     e.preventDefault()
     if (file) {
-      setButton(<Spinner color="light" size="sm">Loading...</Spinner>)
       setButton2(<Spinner color="light" size="sm">Loading...</Spinner>)
       const user = auth.currentUser
       updateProfile(user,
@@ -96,16 +103,16 @@ export default function UpadatePhoto() {
           photoURL: photoURL,
         })
         .then(() => {
-          setButton(<i class='fas fa-check'></i>)
           setButton2(<i class='fas fa-check'></i>)
           setIsEdit("done")
           // console.log("Update photo berhasil")
+          swal({ icon: "success", text: "Berhasil update photo" })
         })
         .catch((err) => {
-          setButton(<i class="fas fa-ban"></i>)
           setButton2(<i class="fas fa-ban"></i>)
           setIsEdit("done")
           // console.log("Update photo gagal")
+          swal({ icon: "error", text: "Update photo gagal" })
         })
     }
   }
@@ -114,11 +121,11 @@ export default function UpadatePhoto() {
     <div>
       {
         preview ? (
-          <img src={preview} alt="Profile" width={200} height={200} />
+          <img src={preview} className="rounded-circle" alt="Profile" width={200} height={200} />
         ) : person.photoURL === null ? (
-          <img src="/user.png" alt="Profile" width={200} height={200} />
+          <img src="/user.png" className="rounded-circle" alt="Profile" width={200} height={200} />
         ) : person.photoURL ? (
-          <img src={person.photoURL} alt="Profile" width={200} height={200} />
+          <img src={person.photoURL} className="rounded-circle" alt="Profile" width={200} height={200} />
         ) : ""
       }
       <Form>

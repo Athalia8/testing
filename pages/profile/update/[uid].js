@@ -8,11 +8,16 @@ import { signOut } from "../../../redux/actions/authActions";
 import { connect } from "react-redux";
 import { auth } from "../../../firebase/config";
 import Router from "next/router";
+import { useEffect } from "react";
 
 function ProfileUpdate(props) {
 
-  // useEffect(() => {
-  // }, [])
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      Router.push("/login");
+    }
+  }, [])
 
   const refresh = () => {
     signOut(auth);
@@ -34,6 +39,7 @@ function ProfileUpdate(props) {
               <UpdateName />
               <UpdateEmailComponent />
               <UpdatePasswordComponent />
+              <div className="text-center"><h6>Silakhakn "Refresh" dan login kembali untuk memulihkan data</h6></div>
               <div className="pt-3 text-center">
                 <Button color="success" onClick={refresh} className="">
                   Refresh

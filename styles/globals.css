@@ -4,7 +4,18 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background: linear-gradient(135deg, #8C9EFF, #9320ff, #d09eff)
+  background: linear-gradient(135deg, #7f80ce, #4e31ce, #6500d8);
+  color: white;
+}
+
+.bg_navbar {
+  background: #631fe0;
+}
+
+.score_info {
+  font-size: 15px;
+  margin-left: 5px;
+  display: inline-flexbox;
 }
 
 a {

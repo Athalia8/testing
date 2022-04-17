@@ -28,7 +28,7 @@ function AllUsers() {
     <div>
       <hr />
       <h5 className="text-center">Users Game Rock Paper Scissors Info</h5>
-      <Table>
+      <Table borderless hover responsive size="sm" className="text-light">
         <thead>
           <tr>
             <th>Username</th>

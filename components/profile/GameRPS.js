@@ -29,7 +29,7 @@ export default function GameRPS() {
   return (
     <div>
       <h5 className="text-center">Score Game Rock Paper Scissors</h5>
-      <Table size="sm">
+      <Table borderless hover responsive size="sm" className="text-light">
         <thead>
           <tr>
             <th>Name</th>

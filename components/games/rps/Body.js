@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import "../../../styles/globals.css";
+import Router from 'next/router'
 import { addDoc, setDoc, collection, where, query, getDocs, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase/config";
 import { connect, useDispatch } from "react-redux";
@@ -26,7 +26,11 @@ const GameBody = (props) => {
 
   const uid = props.data.uid;
   useEffect(() => {
-    if (round <= 3) {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      Router.push("/login");
+      swal({ text: "Silahkan Login untuk lanjut bermain" })
+    } else if (round <= 3) {
       setTimeout(() => {
         swal({
           title: "Round " + round,
@@ -59,9 +63,9 @@ const GameBody = (props) => {
     }
   }, [round]);
 
-  useEffect(() => {
-    // console.log(uid);
-  }, [score]);
+  // useEffect(() => {
+
+  // }, []);
 
   async function getHistory(currScore) {
     const q = query(
@@ -360,6 +364,9 @@ const GameBody = (props) => {
           </div>
         </div>
       </div>
+      <br />
+      <br />
+      <br />
     </div>
   );
 };

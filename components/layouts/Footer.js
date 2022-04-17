@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <div className="fixed-bottom d-inline bg-body rounded">
+    <div className="fixed-bottom d-inline bg_navbar rounded">
       <div className="wrapper text-center">
         <a href="#" className="icon facebook mx-2">
           <div className="tooltip">Facebook</div>
