@@ -1,34 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# react-firebase-team1
 
-## Getting Started
+Dibuat oleh KELOMPOK 1 Binar FSW wave 16
+Anggota kelompok terdiri dari:
 
-First, run the development server:
+1. Cipto Widarto
+2. Athalia Beatrice Boedianto
+3. Fernandre Kurniawan
+4. Zilian Rifaldo
+5. Riski Dwi Nugroho
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Role
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Koordinator / Scrum Master : Cipto Widarto
+2. Repo Maintainer : Fernandre Kurniawan
+3. Member : Riski Dwi Nugroho
+4. Member : Athalia Beatrice Boedianto
+5. Member : Zilian Rifaldo
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Deskripsi Kerja
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+1. Athalia Beatrice Boedianto
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+   - desain Landing page
+   - membuat tampilan frontend Landing page
+   - integrasi Landing page dengan firebase
 
-## Learn More
+2. Fernandre Kurniawan
 
-To learn more about Next.js, take a look at the following resources:
+   - desain Home page
+   - membuat tampilan frontend Home page
+   - membuat tampilan game Rock Paper Scissors
+   - membuat navbar & footer
+   - integrasi Home page dengan firebase
+   - integrasi Rock Paper Scissors page dengan firebase
+   - integrasi Game detail page dengan firebase
+   - implementasi redux
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Cipto Widarto
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   - desain Register & Login page
+   - membuat tampilan frontend Register & Login page
+   - setup firebase di next js
+   - running fungsi register email & password, simpan data user di firestore
+   - running auth login email & password, middleware
+   - feature reset password
+   - integrasi Game detail page dengan firebase
+   - handling page not found
+   - running sign in with Google
+   - integrasi Profile page update profile
 
-## Deploy on Vercel
+4. Zilian Rifaldo
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   - desain Game detail page
+   - membuat tampilan frontend Game detail page
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+5. Riski Dwi Nugroho
+   - desain Game list page
+   - membuat tampilan frontend Game list page
+   - integrasi Game list page dengan firebase
