@@ -24,7 +24,7 @@ export const forUpdatePhoto = (credentials) => {
       .then(() => {
         dispatch({
           type: UPDATE_PHOTO,
-          buttonProfile: <i class='fas fa-check'></i>,
+          buttonProfile: <i className='fas fa-check'></i>,
           info: "done",
         })
         swal({ icon: "succes", text: "Update photo berhasil" })
@@ -32,7 +32,7 @@ export const forUpdatePhoto = (credentials) => {
       .catch((err) => {
         dispatch({
           type: UPDATE_PHOTO,
-          buttonProfile: <i class="fas fa-ban"></i>,
+          buttonProfile: <i className="fas fa-ban"></i>,
           info: "done",
         })
         swal({ icon: "error", text: "Update photo gagal" })
@@ -55,7 +55,7 @@ export const forUpdateName = (credentials) => {
       .then(() => {
         dispatch({
           type: UPDATE_NAME,
-          buttonProfile: <i class='fas fa-check'></i>,
+          buttonProfile: <i className='fas fa-check'></i>,
           info: "done",
         })
         swal({ icon: "succes", text: "Update username berhasil" })
@@ -63,7 +63,7 @@ export const forUpdateName = (credentials) => {
       .catch((err) => {
         dispatch({
           type: UPDATE_NAME,
-          buttonProfile: <i class="fas fa-ban"></i>,
+          buttonProfile: <i className="fas fa-ban"></i>,
           info: "done",
         })
         swal({ icon: "error", text: "Update username gagal" })
@@ -83,7 +83,7 @@ export const forUpdateEmail = (credentials) => {
       .then(() => {
         dispatch({
           type: UPDATE_EMAIL,
-          buttonProfile: <i class='fas fa-check'></i>,
+          buttonProfile: <i className='fas fa-check'></i>,
           info: "done",
         })
         swal({ icon: "succes", text: "Update email berhasil" })
@@ -91,7 +91,7 @@ export const forUpdateEmail = (credentials) => {
       .catch((err) => {
         dispatch({
           type: UPDATE_EMAIL,
-          buttonProfile: <i class="fas fa-ban"></i>,
+          buttonProfile: <i className="fas fa-ban"></i>,
           info: "done",
         })
         swal({ icon: "error", text: "Update email gagal" })
@@ -111,7 +111,7 @@ export const forUpdatePassword = (credentials) => {
       .then(() => {
         dispatch({
           type: UPDATE_PASSWORD,
-          buttonProfile: <i class='fas fa-check'></i>,
+          buttonProfile: <i className='fas fa-check'></i>,
           info: "done",
         })
         swal({ icon: "succes", text: "Update password berhasil" })
@@ -119,7 +119,7 @@ export const forUpdatePassword = (credentials) => {
       .catch((err) => {
         dispatch({
           type: UPDATE_PASSWORD,
-          buttonProfile: <i class="fas fa-ban"></i>,
+          buttonProfile: <i className="fas fa-ban"></i>,
           info: "done",
         })
         swal({ icon: "error", text: "Update password gagal" })
@@ -174,7 +174,7 @@ export const forUpdatePassword = (credentials) => {
 //         swal({ icon: "success", text: "Update berhasil, silahkan login" });
 //         dispatch({
 //           type: UPDATE_PROFILE,
-//           button: <i class='fas fa-check'></i>
+//           button: <i className='fas fa-check'></i>
 //         })
 //       })
 //       .catch((err) => {
@@ -182,7 +182,7 @@ export const forUpdatePassword = (credentials) => {
 //         swal({ icon: "error", text: "Update Failed" });
 //         dispatch({
 //           type: UPDATE_PROFILE,
-//           button: <i class="fas fa-ban"></i>
+//           button: <i className="fas fa-ban"></i>
 //         })
 //       })
 //   }

@@ -38,13 +38,13 @@ export default function UpdateEmailComponent() {
       const user = auth.currentUser
       updateEmail(user, person.email)
         .then(() => {
-          setButton(<i class='fas fa-check'></i>)
+          setButton(<i className='fas fa-check'></i>)
           setIsEdit("done")
           swal({ icon: "succes", text: "Berhasil update email" })
           // console.log("Update email berhasil")
         })
         .catch((err) => {
-          setButton(<i class="fas fa-ban"></i>)
+          setButton(<i className="fas fa-ban"></i>)
           setIsEdit("done")
           swal({ icon: "error", text: "Update email gagal" + err.message })
           // console.log("Update email gagal" + err.message)

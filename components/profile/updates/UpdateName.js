@@ -46,13 +46,13 @@ export default function UpdateName() {
           displayName: person.displayName,
         })
         .then(() => {
-          setButton(<i class='fas fa-check'></i>)
+          setButton(<i className='fas fa-check'></i>)
           setIsEdit("done")
           swal({ icon: "succes", text: "Berhasil update username" })
           // console.log("Update username berhasil")
         })
         .catch((err) => {
-          setButton(<i class="fas fa-ban"></i>)
+          setButton(<i className="fas fa-ban"></i>)
           setIsEdit("done")
           swal({ icon: "error", text: "Update username gagal" })
           // console.log("Update username gagal")

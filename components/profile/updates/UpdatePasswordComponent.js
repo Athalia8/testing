@@ -39,13 +39,13 @@ export default function UpdatePasswordComponent() {
       const user = auth.currentUser
       updatePassword(user, person.password)
         .then(() => {
-          setButton(<i class='fas fa-check'></i>)
+          setButton(<i className='fas fa-check'></i>)
           setIsEdit("done")
           swal({ icon: "succes", text: "Berhasil update password" })
           // console.log("Update password berhasil")
         })
         .catch((err) => {
-          setButton(<i class="fas fa-ban"></i>)
+          setButton(<i className="fas fa-ban"></i>)
           swal({ icon: "error", text: "Update password gagal" + err.message })
           // console.log("Update password gagal" + err.message)
         })

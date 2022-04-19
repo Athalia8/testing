@@ -12,7 +12,7 @@ export default function LandingPage() {
         <Slidevent></Slidevent>
         <Category></Category>
         <Gameselection></Gameselection>
-        <About></About>
+        {/* <About></About> */}
       </Container>
     </Layout >
   )

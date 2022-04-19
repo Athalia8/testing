@@ -1,82 +1,105 @@
 import { db } from "../../firebase/config";
-import { doc, Firestore, getDoc, collection, onSnapshot } from "firebase/firestore";
-import { Card, Col, List, Row, Button, CardImg } from "reactstrap";
+import { collection, getDocs, } from "firebase/firestore";
+import { Col, Row, Button, CardImg } from "reactstrap";
 import Link from "next/link";
-import { useEffect, useState, slice } from "react";
+import { useEffect, useState, } from "react";
+import styles from './Landing.module.css'
 
 export default function Catagory() {
-  const [gamess, setGamess] = useState([{ name: "Loading...", id: "initial" }]);
+  const [allGames, setAllGames] = useState([]);
+  const [games, setGames] = useState([]);
 
-  // var gamesd = this.props.data.slice(0, 5).map((item) => {
-  //   return <gamesdItem key={item.id} gamesd={item} />
-  // });
+  var all = []
 
-  // console.log(gamess);
-  useEffect(
-    () =>
-      onSnapshot(collection(db, "games"), (snapshot) =>
-        setGamess(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-      ),
-    []
-  );
+  useEffect(async () => {
+    const citiesRef = collection(db, "games");
+    const querySnapshot = await getDocs(citiesRef);
+    querySnapshot.forEach((doc) => {
+      all.push({ ...doc.data(), id: doc.id });
+    });
+    setAllGames(all)
+    setGames(all)
+  }, [])
+
+  // const setAll = () => {
+  //   setGames(allGames)
+  // }
+  const setAdventure = () => {
+    const game = allGames
+    const adventure = game.filter((obj) => {
+      return obj.genre === "Adventure";
+    });
+    setGames(adventure)
+  }
+  const setAction = () => {
+    const game = allGames
+    const action = game.filter((obj) => {
+      return obj.genre === "Action";
+    });
+    setGames(action)
+  }
+  const setClassic = () => {
+    const game = allGames
+    const classic = game.filter((obj) => {
+      return obj.genre === "Classic";
+    });
+    setGames(classic)
+  }
+  const setIndie = () => {
+    const game = allGames
+    const indie = game.filter((obj) => {
+      return obj.genre === "Indie";
+    });
+    setGames(indie)
+  }
+  const setRPG = () => {
+    const game = allGames
+    const rpg = game.filter((obj) => {
+      return obj.genre === "RPG";
+    });
+    setGames(rpg)
+  }
+  const setSport = () => {
+    const game = allGames
+    const sports = game.filter((obj) => {
+      return obj.genre === "Sports";
+    });
+    setGames(sports)
+  }
 
   return (
     <>
       <hr />
+      <nav>
+        <div className="nav nav-tabs" id="nav-tab" role="tablist">
+          {/* <button className="nav-link text-light" onClick={setAll}>ALL</button> */}
+          <button className="nav-link text-light" onClick={setAdventure}>Adventure</button>
+          <button className="nav-link text-light" onClick={setAction}>Action</button>
+          <button className="nav-link text-light" onClick={setClassic}>Classic</button>
+          <button className="nav-link text-light" onClick={setIndie}>Indie</button>
+          <button className="nav-link text-light" onClick={setRPG}>RPG</button>
+          <button className="nav-link text-light" onClick={setSport}>Sport</button>
+        </div>
+      </nav>
+
       <Row>
         <Col>
-          <Card body>
-            <h6 className="text-center" style={{ color: "black" }}>
-              Top Playing Game
-            </h6>
-          </Card>
-          <List type="unstyled" className="text-center">
-            {gamess.map((games) => (
-              <li key={games.id}>
-                <Link href={"/games/" + games.id}>
-                  <Button color="warning" outline className="btn mx-2 my-2">
-                    <CardImg alt="image 1" src={games.thumbnail} width="250px" height="200px" />
-                  </Button>
-                </Link>
-              </li>
-            ))}
-          </List>
-        </Col>
-        <Col>
-          <Card body>
-            <h6 className="text-center" style={{ color: "black" }}>
-              New Released
-            </h6>
-          </Card>
-          <List type="unstyled" className="text-center">
-            {gamess.map((games) => (
-              <li key={games.id}>
-                <Link href={"/games/" + games.id}>
-                  <Button color="warning" outline className="btn mx-2 my-2">
-                    <CardImg alt="image 1" src={games.thumbnail} width="250px" height="200px" />
-                  </Button>
-                </Link>
-              </li>
-            ))}
-          </List>
-        </Col>
-        <Col>
-          <Card body>
-            <h6 className="text-center" style={{ color: "black" }}>
-              Coming Soon
-            </h6>
-          </Card>
-          <List type="unstyled" className="text-center">
-            {gamess.map((games) => (
-              <li key={games.id}>
-                <Link href={"/games/" + games.id}>
-                  <Button color="warning" outline className="btn mx-2 my-2">
-                    <CardImg alt="image 1" src={games.thumbnail} width="250px" height="200px" />
-                  </Button>
-                </Link>
-              </li>
-            ))}
-          </List>
+          <div className="border border-primary">
+            <Row>
+              {games.map((game) => (
+                <Col lg='4' className="text-center mx-auto">
+                  <div key={game.id} >
+                    <Link href={"/games/" + game.id}>
+                      <Button color="warning" outline className="btn my-2">
+                        <CardImg alt={game.name} src={game.thumbnail} className={styles.item} />
+                        <h6>{game.name}</h6>
+                      </Button>
+                    </Link>
+                  </div>
+                </Col>
+              ))}
+            </Row>
+          </div>
         </Col>
       </Row>
     </>
