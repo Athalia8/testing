@@ -1,4 +1,10 @@
-import { LOGIN_EMAIL_PASSWORD, REGISTRASI_EMAIL_PASSWORD, LOGIN_GOOGLE, LOGIN_FACEBOOK, LOGOUT } from '../actions/authActions'
+import {
+  LOGIN_EMAIL_PASSWORD,
+  REGISTRASI_EMAIL_PASSWORD,
+  LOGIN_GOOGLE,
+  LOGIN_FACEBOOK,
+  LOGOUT,
+} from "../actions/authActions";
 
 if (typeof window !== "undefined") {
   var scoreRedux = JSON.parse(localStorage.getItem("score"));
@@ -20,6 +26,7 @@ const authReducer = (state = initState, action) => {
         ...state,
         buttonLogin: action.payload.button,
         scoreRedux: action.payload.score,
+        isPlayed: action.payload.isPlayed,
       };
     case REGISTRASI_EMAIL_PASSWORD:
       return {

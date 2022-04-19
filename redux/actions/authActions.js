@@ -1,25 +1,31 @@
 import { auth, db } from "../../firebase/config";
-import { createUserWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  FacebookAuthProvider,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  updateProfile,
+} from "firebase/auth";
 import { getDoc, doc, setDoc, getDocs, query, collection, where } from "firebase/firestore";
 import Router from "next/router";
 import swal from "sweetalert";
 
-export const LOGIN_EMAIL_PASSWORD = "LOGIN_EMAIL_PASSWORD"
-export const REGISTRASI_EMAIL_PASSWORD = "REGISTRASI_EMAIL_PASSWORD"
-export const LOGIN_GOOGLE = "LOGIN_GOOGLE"
-export const LOGIN_FACEBOOK = "LOGIN_FACEBOOK"
-export const LOGOUT = "LOGOUT"
+export const LOGIN_EMAIL_PASSWORD = "LOGIN_EMAIL_PASSWORD";
+export const REGISTRASI_EMAIL_PASSWORD = "REGISTRASI_EMAIL_PASSWORD";
+export const LOGIN_GOOGLE = "LOGIN_GOOGLE";
+export const LOGIN_FACEBOOK = "LOGIN_FACEBOOK";
+export const LOGOUT = "LOGOUT";
 
 export const signIn = (credentials) => {
-
   return async (dispatch, getState, { getFirebase }) => {
     dispatch({
       type: LOGIN_EMAIL_PASSWORD,
       payload: {
         button: "Process..",
-        score: 0
-      }
-    })
+        score: 0,
+      },
+    });
     try {
       // Sign in with email & password
       const res = await signInWithEmailAndPassword(auth, credentials.email, credentials.password);
@@ -34,16 +40,19 @@ export const signIn = (credentials) => {
 
       const docRef2 = doc(db, "rps_game_points", user.uid);
       const docSnap2 = await getDoc(docRef2);
+      var isPlayed = false;
       if (docSnap2.exists()) {
         var score = localStorage.setItem("score", docSnap2.data().total);
+        isPlayed = true;
       }
       dispatch({
         type: LOGIN_EMAIL_PASSWORD,
         payload: {
           button: "Welcome",
-          score: score
-        }
-      })
+          score: score,
+          isPlayed: isPlayed,
+        },
+      });
       swal({ icon: "success", text: "Login Berhasil" });
       Router.push("/home");
     } catch (error) {
@@ -54,9 +63,9 @@ export const signIn = (credentials) => {
             type: LOGIN_EMAIL_PASSWORD,
             payload: {
               button: "Login",
-              score: 0
-            }
-          })
+              score: 0,
+            },
+          });
           break;
         case "auth/wrong-password":
           swal({ icon: "error", text: "Password anda salah" });
@@ -64,15 +73,15 @@ export const signIn = (credentials) => {
             type: LOGIN_EMAIL_PASSWORD,
             payload: {
               button: "Login",
-              score: 0
-            }
-          })
+              score: 0,
+            },
+          });
           break;
         default:
           swal({ icon: "error", text: error.code });
       }
     }
-  }
+  };
 };
 
 export const signOut = () => {
@@ -87,26 +96,27 @@ export const signOut = () => {
 };
 
 export const signUp = (credentials) => {
-
   return async (dispatch, getState, { getFirebase }) => {
     dispatch({
       type: REGISTRASI_EMAIL_PASSWORD,
       payload: {
         button: "Process..",
-      }
-    })
+      },
+    });
     try {
       // registrasi email & password
       const res = await createUserWithEmailAndPassword(auth, credentials.email, credentials.password);
       const user = res.user;
       await updateProfile(auth.currentUser, {
         displayName: credentials.username,
-        photoURL: "https://i.ibb.co/H4f3Hkv/profile.png"
-      }).then(() => {
-        // console.log("Profile updated")
-      }).catch((error) => {
-        // console.log(error, message)
-      });
+        photoURL: "https://i.ibb.co/H4f3Hkv/profile.png",
+      })
+        .then(() => {
+          // console.log("Profile updated")
+        })
+        .catch((error) => {
+          // console.log(error, message)
+        });
       // create doc user
       const docRef = doc(db, "users", user.uid);
       await setDoc(docRef, {
@@ -120,20 +130,20 @@ export const signUp = (credentials) => {
         type: REGISTRASI_EMAIL_PASSWORD,
         payload: {
           button: "Welcome",
-        }
-      })
+        },
+      });
       swal({ icon: "success", text: "Registrasi berhasil, silahkan Login" });
-      Router.push("/login")
+      Router.push("/login");
     } catch (error) {
       switch (error.code) {
-        case 'auth/email-already-in-use':
+        case "auth/email-already-in-use":
           swal({ icon: "error", text: "Email sudah terdaftar" });
           dispatch({
             type: REGISTRASI_EMAIL_PASSWORD,
             payload: {
               button: "Register",
-            }
-          })
+            },
+          });
           break;
         default:
           swal({ icon: "error", text: error.message });
@@ -141,11 +151,11 @@ export const signUp = (credentials) => {
             type: REGISTRASI_EMAIL_PASSWORD,
             payload: {
               button: "Register",
-            }
-          })
+            },
+          });
       }
     }
-  }
+  };
 };
 
 export const signInGoogle = (credentials) => {
@@ -155,8 +165,8 @@ export const signInGoogle = (credentials) => {
     dispatch({
       type: LOGIN_GOOGLE,
       payload: {
-        button: "Process.."
-      }
+        button: "Process..",
+      },
     });
     try {
       // sign in with google
@@ -168,8 +178,8 @@ export const signInGoogle = (credentials) => {
         email: user.email,
         photoURL: user.photoURL,
       };
-      localStorage.setItem('user', JSON.stringify(dataUser));
-      localStorage.setItem('token', user.accessToken);
+      localStorage.setItem("user", JSON.stringify(dataUser));
+      localStorage.setItem("token", user.accessToken);
       const q = query(collection(db, "users"), where("uid", "==", user.uid));
       const docs = await getDocs(q);
       // console.log(docs.docs)
@@ -186,14 +196,14 @@ export const signInGoogle = (credentials) => {
       const docRef2 = doc(db, "rps_game_points", user.uid);
       const docSnap2 = await getDoc(docRef2);
       if (docSnap2.exists()) {
-        var score = docSnap2.data().total
+        var score = docSnap2.data().total;
         localStorage.setItem("score", score);
       }
       dispatch({
         type: LOGIN_GOOGLE,
         payload: {
-          button: "Google"
-        }
+          button: "Google",
+        },
       });
       swal({ icon: "success", text: "Anda masuk dengan akun Google" });
       Router.push("/home");
@@ -202,13 +212,13 @@ export const signInGoogle = (credentials) => {
       dispatch({
         type: LOGIN_GOOGLE,
         payload: {
-          button: "Google"
-        }
+          button: "Google",
+        },
       });
       swal({ icon: "error", text: error.code });
     }
-  }
-}
+  };
+};
 
 export const signInFacebook = (credentials) => {
   const facebookProvider = new FacebookAuthProvider();
@@ -217,8 +227,8 @@ export const signInFacebook = (credentials) => {
     dispatch({
       type: LOGIN_FACEBOOK,
       payload: {
-        button: "Process.."
-      }
+        button: "Process..",
+      },
     });
     try {
       // sign in with facebook
@@ -230,8 +240,8 @@ export const signInFacebook = (credentials) => {
         email: user.email,
         photoURL: user.photoURL,
       };
-      localStorage.setItem('user', JSON.stringify(dataUser));
-      localStorage.setItem('token', user.accessToken);
+      localStorage.setItem("user", JSON.stringify(dataUser));
+      localStorage.setItem("token", user.accessToken);
       const q = query(collection(db, "users"), where("uid", "==", user.uid));
       const docs = await getDocs(q);
       if (docs.docs.length === 0) {
@@ -247,14 +257,14 @@ export const signInFacebook = (credentials) => {
       const docRef2 = doc(db, "rps_game_points", user.uid);
       const docSnap2 = await getDoc(docRef2);
       if (docSnap2.exists()) {
-        var score = docSnap2.data().total
+        var score = docSnap2.data().total;
         localStorage.setItem("score", score);
       }
       dispatch({
         type: LOGIN_FACEBOOK,
         payload: {
-          button: "Facebook"
-        }
+          button: "Facebook",
+        },
       });
       swal({ icon: "success", text: "Anda masuk dengan akun Facebook" });
       Router.push("/home");
@@ -263,8 +273,8 @@ export const signInFacebook = (credentials) => {
       dispatch({
         type: LOGIN_FACEBOOK,
         payload: {
-          button: "Facebook"
-        }
+          button: "Facebook",
+        },
       });
       switch (error.code) {
         case "auth/account-exists-with-different-credential":
@@ -273,5 +283,5 @@ export const signInFacebook = (credentials) => {
           return swal({ icon: "error", text: error.code });
       }
     }
-  }
-}
+  };
+};

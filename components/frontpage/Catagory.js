@@ -1,4 +1,3 @@
-
 import { db } from "../../firebase/config";
 import { doc, Firestore, getDoc, collection, onSnapshot } from "firebase/firestore";
 import { Card, Col, List, Row, Button, CardImg } from "reactstrap";
@@ -27,19 +26,16 @@ export default function Catagory() {
       <Row>
         <Col>
           <Card body>
-            <h6 className="text-center">Top Playing Game</h6>
+            <h6 className="text-center" style={{ color: "black" }}>
+              Top Playing Game
+            </h6>
           </Card>
           <List type="unstyled" className="text-center">
             {gamess.map((games) => (
               <li key={games.id}>
                 <Link href={"/games/" + games.id}>
-                  <Button color="warning" outline className="btn mx-2 my-2" >
-                    <CardImg
-                      alt="image 1"
-                      src={games.thumbnail}
-                      width="250px"
-                      height="200px"
-                    />
+                  <Button color="warning" outline className="btn mx-2 my-2">
+                    <CardImg alt="image 1" src={games.thumbnail} width="250px" height="200px" />
                   </Button>
                 </Link>
               </li>
@@ -48,19 +44,16 @@ export default function Catagory() {
         </Col>
         <Col>
           <Card body>
-            <h6 className="text-center">New Released</h6>
+            <h6 className="text-center" style={{ color: "black" }}>
+              New Released
+            </h6>
           </Card>
           <List type="unstyled" className="text-center">
             {gamess.map((games) => (
               <li key={games.id}>
                 <Link href={"/games/" + games.id}>
-                  <Button color="warning" outline className="btn mx-2 my-2" >
-                    <CardImg
-                      alt="image 1"
-                      src={games.thumbnail}
-                      width="250px"
-                      height="200px"
-                    />
+                  <Button color="warning" outline className="btn mx-2 my-2">
+                    <CardImg alt="image 1" src={games.thumbnail} width="250px" height="200px" />
                   </Button>
                 </Link>
               </li>
@@ -69,19 +62,16 @@ export default function Catagory() {
         </Col>
         <Col>
           <Card body>
-            <h6 className="text-center">Coming Soon</h6>
+            <h6 className="text-center" style={{ color: "black" }}>
+              Coming Soon
+            </h6>
           </Card>
           <List type="unstyled" className="text-center">
             {gamess.map((games) => (
               <li key={games.id}>
                 <Link href={"/games/" + games.id}>
-                  <Button color="warning" outline className="btn mx-2 my-2" >
-                    <CardImg
-                      alt="image 1"
-                      src={games.thumbnail}
-                      width="250px"
-                      height="200px"
-                    />
+                  <Button color="warning" outline className="btn mx-2 my-2">
+                    <CardImg alt="image 1" src={games.thumbnail} width="250px" height="200px" />
                   </Button>
                 </Link>
               </li>
@@ -90,6 +80,5 @@ export default function Catagory() {
         </Col>
       </Row>
     </>
-  )
+  );
 }
-
