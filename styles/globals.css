@@ -91,3 +91,12 @@ a {
 .mt-6{
   margin-top: 4rem !important;
 }
+
+.played-flag{
+  margin-top: -35px !important;
+  margin-bottom: 35px !important;
+  z-index: 100;
+  background-color: #E9EEF1;
+  width: 250px;
+  text-align: center;
+}
