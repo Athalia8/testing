@@ -11,7 +11,7 @@ export default function Gameselection() {
   return (
     <div>
       <hr />
-      <h3 className='text-center'>Choose your Game Gender</h3>
+      {/* <h3 className='text-center'>Choose your Game Gender</h3>
       <div className="justify-content-center d-flex">
         <Navbar color="purple" light expand="md">
           <NavbarToggler onClick={changeToggle} />
@@ -32,19 +32,23 @@ export default function Gameselection() {
             </Nav>
           </Collapse>
         </Navbar>
-      </div>
-      <div className='text-center'>
+      </div> */}
+      {/* <div className='text-center'>
         <img className="mx-2 my-2" src="https://cdn.pixabay.com/photo/2019/09/23/16/06/war-4499000_960_720.jpg" width={250} height={200} alt='action game' />
         <img className="mx-2 my-2" src="https://i.pinimg.com/564x/09/8e/6b/098e6bbe79d3bac42fdda10d7f18c275.jpg" width={250} height={200} alt='Thriller' />
         <img className="mx-2 my-2" src="https://i.pinimg.com/564x/09/8e/6b/098e6bbe79d3bac42fdda10d7f18c275.jpg" width={250} height={200} alt='Thriller' />
-      </div>
+      </div> */}
       <div className='text-center my-3'>
-      <Link href={"/games/list"}>
-      <Button  color="light" outline>
-          Game Detail
-      </Button>
-      </Link>
+        <Link href={"/games/list"}>
+          <Button color="light" outline>
+            Game Detail
+          </Button>
+        </Link>
       </div>
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   )
 }

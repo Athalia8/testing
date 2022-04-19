@@ -80,7 +80,7 @@ export default function UpadatePhoto() {
             .then((url) => {
               setStatus('Upload Success');
               setPhotoURL(url)
-              setButton(<i class='fas fa-check'></i>)
+              setButton(<i className='fas fa-check'></i>)
               setIsEdit("done")
             })
             .catch((error) => {
@@ -103,13 +103,13 @@ export default function UpadatePhoto() {
           photoURL: photoURL,
         })
         .then(() => {
-          setButton2(<i class='fas fa-check'></i>)
+          setButton2(<i className='fas fa-check'></i>)
           setIsEdit("done")
           // console.log("Update photo berhasil")
           swal({ icon: "success", text: "Berhasil update photo" })
         })
         .catch((err) => {
-          setButton2(<i class="fas fa-ban"></i>)
+          setButton2(<i className="fas fa-ban"></i>)
           setIsEdit("done")
           // console.log("Update photo gagal")
           swal({ icon: "error", text: "Update photo gagal" })
