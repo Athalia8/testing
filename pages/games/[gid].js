@@ -1,6 +1,7 @@
 import Layout from "../../components/layouts/Layout";
 import { Container, Row, Col } from "reactstrap";
 import ImgDetail from "../../components/games/ImgDetail";
+import VideoDetail from "../../components/games/VideoDetail";
 import Card from "../../components/games/Cardinfo";
 import CardUser from "../../components/games/CardUser";
 import { db } from "../../firebase/config";
@@ -52,6 +53,8 @@ export async function getServerSideProps(context) {
 }
 
 export default function GameDetail({ detailGame, detailGame2, detailGame3, detailGame4, gameId }) {
+  const videoOptions = { cloudName: "dypazz6y2", publicId: "game-trailer/Deathloop.mp4" };
+
   return (
     <div>
       <Layout title="Game detail">
@@ -59,6 +62,7 @@ export default function GameDetail({ detailGame, detailGame2, detailGame3, detai
           <Row>
             <Col sm={8}>
               <ImgDetail detailGame={detailGame} gameId={gameId} />
+              <VideoDetail options={videoOptions}/>
             </Col>
             <Col sm={4}>
               <CardUser gameId={gameId} detailGame={detailGame2} />
